@@ -1,0 +1,3 @@
+{
+    "files": ["SoftArmMotorConfig.json","main_csv.py","SystemMotors.py","main_sensor.py","InverseKinematics.py","SoftNeckMotorConfig.json","main.py","Sensor.py","Motor.py","csv_prueba.csv"]
+}

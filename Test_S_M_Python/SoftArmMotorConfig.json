@@ -1,0 +1,9 @@
+{
+"type" : "softArm",
+"new_encRes" : 2048,
+"new_mlRatio" : 24,
+"new_SampSL" : 0.001,
+"motor_current_limit" : 0.144,
+"drive_current_limit" : 20,
+"canPort" : "can1"
+}
