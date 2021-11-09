@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.1, 2021-11-08T15:34:22. -->
+<!-- Written by QtCreator 4.13.1, 2021-11-09T12:44:26. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -90,7 +90,7 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">qt.qt5.51210.gcc_64_kit</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">-1</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">8</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">1</value>
    <value type="int" key="ProjectExplorer.Target.BuildConfigurationCount">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.DeployConfiguration.0">
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
@@ -167,14 +167,14 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
-     <value type="QString">LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages</value>
+     <value type="QString">LD_LIBRARY_PATH=&lt;VALUE&gt;</value>
     </valuelist>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/main.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/main.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">SystemMotors2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/SystemMotors.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/SystemMotors.py</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{67d8a409-ffd0-4eef-814f-3e61fa5cf219}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/main.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/SystemMotors.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -184,7 +184,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/humasoft/PythonProject/Test_S_M_Python</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/humasoft/SOFIA_Python/Test_S_M_Python</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -246,13 +246,15 @@
     </valuelist>
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">InverseKinematics</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/InverseKinematics.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/InverseKinematics.py</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
+     <value type="QString">LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages/</value>
+    </valuelist>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/main.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/main.py</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/InverseKinematics.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{67d8a409-ffd0-4eef-814f-3e61fa5cf219}</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/main.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -262,7 +264,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/humasoft/SOFIA_Python/Test_S_M_Python</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.2">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -325,12 +327,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Motor</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/Motor.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/Motor.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main_csv2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/main_csv.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/main_csv.py</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/Motor.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/main_csv.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -403,12 +405,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">SystemMotors</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/SystemMotors.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/SystemMotors.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">SoftNeckMotorConfig2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/SoftNeckMotorConfig.json</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/SoftNeckMotorConfig.json</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/SystemMotors.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/SoftNeckMotorConfig.json</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -481,12 +483,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">SoftArmMotorConfig</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/SoftArmMotorConfig.json</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/SoftArmMotorConfig.json</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main_sensor2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/main_sensor.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/main_sensor.py</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/SoftArmMotorConfig.json</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/main_sensor.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -559,12 +561,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">SoftNeckMotorConfig</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/SoftNeckMotorConfig.json</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/SoftNeckMotorConfig.json</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">InverseKinematics2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/InverseKinematics.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/InverseKinematics.py</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/SoftNeckMotorConfig.json</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/InverseKinematics.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -637,12 +639,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Sensor</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/Sensor.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/Sensor.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Motor2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/Motor.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/Motor.py</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/Sensor.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/Motor.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -714,15 +716,13 @@
     </valuelist>
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
-     <value type="QString">LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages</value>
-    </valuelist>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main_sensor</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/main_sensor.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/main_sensor.py</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Sensor2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/Sensor.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/Sensor.py</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{67d8a409-ffd0-4eef-814f-3e61fa5cf219}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/main_sensor.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/Sensor.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -732,7 +732,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/humasoft/PythonProject/Test_S_M_Python</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.8">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -795,12 +795,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main_csv</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/main_csv.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/main_csv.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">SoftArmMotorConfig2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/SoftArmMotorConfig.json</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/SoftArmMotorConfig.json</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{67d8a409-ffd0-4eef-814f-3e61fa5cf219}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/main_csv.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/SoftArmMotorConfig.json</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -810,7 +810,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/humasoft/PythonProject/Test_S_M_Python</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.9">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -873,12 +873,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">csv_prueba</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/PythonProject/Test_S_M_Python/csv_prueba.csv</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/PythonProject/Test_S_M_Python/csv_prueba.csv</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">csv_prueba2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/humasoft/SOFIA_Python/Test_S_M_Python/csv_prueba.csv</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/humasoft/SOFIA_Python/Test_S_M_Python/csv_prueba.csv</value>
     <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/PythonProject/Test_S_M_Python/csv_prueba.csv</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/humasoft/SOFIA_Python/Test_S_M_Python/csv_prueba.csv</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

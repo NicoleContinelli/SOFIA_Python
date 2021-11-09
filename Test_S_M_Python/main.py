@@ -35,35 +35,6 @@ motors.setPositions([theta1, theta2, theta3])
 
 
 
-
-
-
-
-
-'''
-mi_sensor = imu.IMU3DMGX510("/dev/ttyUSB0", 50)
-mi_sensor.set_streamon()
-'''
-
-'''
-
-# Kinematics parameters
-a = 0.052  # m distance between A and base
-b = 0.052  # m distance between B and mobile platform
-L0 = 0.107  # Neck Lenght
-
-
-
-# mi_sensor.set_streamon() #>> para calibrar el sensor
-'''
-'''
-for i in np.arange(0, 10, 0.02):
-    print("Motor 1 = " + str(motor1.GetPosition()) + " Motor 2 = " + str(motor2.GetPosition()) + " Motor 3 = " + str(motor3.GetPosition()))
-print(theta1, theta2, theta3)
-'''
-
-
-
 # Knowing the Inclination and Orientation of the sensor, with a prevoius motor position
 
 
