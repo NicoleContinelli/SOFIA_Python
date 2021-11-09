@@ -1,9 +1,6 @@
-# Sensors Libraries
-import SerialComm as sc
-import attitude_estimator as ae
-import imu3dmgx510 as imu
 import math
 import numpy as np
+import pandas as pd
 
 
 from Motor import Motor
@@ -12,62 +9,60 @@ from InverseKinematics import InverseKinematics
 from Sensor import Sensor
 
 
-# Motors movements with the classes
-motors = SystemMotors(3)
-print(motors.loadMotors([1,2,3]))
-motors.startMotors()
+# Motors
+motors = SystemMotors(3) # instantiate SystemMotors class >> number of motors
+motors.loadMotors([1, 2, 3]) # motor's ids
+motors.startMotors() # start motors
 
-mi_sensor = Sensor()
-mi_sensor.sensorStream()
+# Sensor
+mi_sensor = Sensor() # instantiate Sensor class
+mi_sensor.sensorStream() # enable sensor
 
+# Initial positions
+orientation = 0
+tilt = 20
 
-for pos in motors.getPositions():
-    print(pos)
+# Parameters of the DataFrame
+cols = ['Inclination', 'Orientation', 'M1', 'M2','M3']
+data = []
 
-kine1 = InverseKinematics(0, 0)
-theta1, theta2, theta3 = kine1.neckInverseKinematics()
-print(theta1, theta2, theta3)
+# Orientation's repetition
+for i in range(1,5):
+    kine1 = InverseKinematics(tilt, orientation) # instantiate InverseKinematics class
+    theta1, theta2, theta3 = kine1.neckInverseKinematics() # saving the length's cables
 
-motors.setupPositionsMode(10, 10)
-motors.setPositions([theta1, theta2, theta3])
-#motors.motorsArray[2].getPosition()
+    motors.setupPositionsMode(10, 10)
+    motors.setPositions([theta1, theta2, theta3])
 
+    # Knowing the Inclination and Orientation of the sensor, with a previous motor position
+    for i in np.arange(0, 5, 0.02): # time sampling >> steps of 0.02
+        pitch = mi_sensor.getPitch()
+        roll = mi_sensor.getRoll()
+        yaw = mi_sensor.getYaw()
 
+        cos_p = math.cos(pitch)
+        cos_r = math.cos(roll)
+        sen_p = math.sin(pitch)
+        sen_r = math.sin(roll)
 
+        incli = math.sqrt(pitch**2 + roll**2) * (180 / math.pi)
+        orient = ((math.atan2(roll, pitch) * (180 / math.pi)))
 
-# Knowing the Inclination and Orientation of the sensor, with a prevoius motor position
+        # Conditions for having 360 degrees in orientation
+        if orient > 0:
+            orient = 359 - orient
 
+        if orient < 0:
+            orient = abs(orient)
 
-for i in np.arange(0, 30, 0.02):
-    pitch = mi_sensor.getPitch()
-    roll = mi_sensor.getRoll()
-    yaw = mi_sensor.getYaw()
+        print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
 
-    cos_p = math.cos(pitch)
-    cos_r = math.cos(roll)
-    sen_p = math.sin(pitch)
-    sen_r = math.sin(roll)
-
-#    print("Pitch:  ", round(pitch * (180 / math.pi), 2), "Roll:  ", round(roll * (180 / math.pi), 2))
-
-    incli = math.sqrt(pitch**2 + roll**2) * (180 / math.pi)
-    orient = ((math.atan2(roll, pitch) * (180 / math.pi)))
-    if orient > 0:
-        orient = 359 - orient
-
-    if orient < 0:
-        orient = abs(orient)
-
-
-
-
-
-
-
-#    incli = ((math.acos(((cos_p * cos_r)/(math.sqrt(((sen_p*cos_r)**2) + ((sen_r)**2) + ((cos_p * cos_r)**2)))))*180)/math.pi)
-#    orient = ((math.acos((sen_p * cos_r)/(math.sqrt(((sen_p * cos_r)**2) + ((sen_r)**2))))*180) / math.pi)
+        # Adding the values of incli, orient and encoders in "data"
+        data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
 
 
+    df = pd.DataFrame(data, columns = cols) # adding the data values (array type), to the data frame
+    orientation += 90 # changing orientation's value (in steps of 45 degrees)
 
-    print("Inclination: ", round(incli, 1), " Orientation: " ,round(orient, 1))
-#    print("Encoder 1:  ", motors.motorsArray[1].getPosition(), "Encoder 2:  ", motors.motorsArray[1].getPosition(), "Encoder 3:  ", motors.motorsArray[1].getPosition())
+print(df)
+df.to_csv(r'/home/humasoft/SOFIA_Python/Data/sensor_motor.csv',index = False)
