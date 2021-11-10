@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 
 
-from Motor import Motor
 from SystemMotors import SystemMotors
 from InverseKinematics import InverseKinematics
 from Sensor import Sensor
@@ -65,4 +64,4 @@ for i in range(1,5):
     orientation += 90 # changing orientation's value (in steps of 45 degrees)
 
 print(df)
-df.to_csv(r'/home/humasoft/SOFIA_Python/Data/sensor_motor.csv',index = False)
+df.to_csv(r'/home/humasoft/SOFIA_Python/Data/sensor_motor.csv', index = False)
