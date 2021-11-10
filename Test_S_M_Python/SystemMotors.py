@@ -24,6 +24,10 @@ class SystemMotors:
         for motor in self.motorsArray:
             motor.startMotor()
 
+    def stopMotors(self):
+        for motor in self.motorsArray:
+            motor.stopMotor()
+
     def setupPositionsMode(self, vel, accel):
         for motor in self.motorsArray:
             motor.setupPositionMode(vel, accel)
@@ -37,3 +41,11 @@ class SystemMotors:
     def getPositions(self):
         for motor in self.motorsArray:
             yield motor.getPosition()
+
+    def getAmps(self):
+        for motor in self.motorsArray:
+            yield motor.getAmp()
+
+    def getVelocities(self):
+        for motor in self.motorsArray:
+            yield motor.getVelocity()

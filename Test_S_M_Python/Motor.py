@@ -34,3 +34,9 @@ class Motor:
 
     def getPosition(self):
         return self.motor.GetPosition()
+
+    def getAmp(self):
+        return self.motor.GetAmps()
+
+    def getVelocity(self):
+        return self.motor.GetVelocity()
