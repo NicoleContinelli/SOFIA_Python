@@ -21,11 +21,6 @@ for i in range(1000):
         pos = [pos[i] + diff[i] for i in range(len(pos))]
         motors.setupPositionsMode(10, 10)
         motors.setPositions(pos)
-        print(diff)
-
-motors.stopMotors()
-motors.startMotors()
-
 
 pos = [val for val in motors.getPositions()]
 print(pos)
