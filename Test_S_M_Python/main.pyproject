@@ -1,3 +1,3 @@
 {
-    "files": ["Sensor.py","SoftNeckMotorConfig.json","test_sensor.py","InverseKinematics.py","Motor.py","SystemMotors.py","SoftArmMotorConfig.json","main.py","mainCalibration.py"]
+    "files": ["SystemMotors.py","Sensor.py","Motor.py","InverseKinematics.py","SoftArmMotorConfig.json","test_sensor.py","main.py","SoftNeckMotorConfig.json","calibrate_neck.py"]
 }
