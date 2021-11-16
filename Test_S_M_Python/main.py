@@ -1,3 +1,4 @@
+
 import math
 import numpy as np
 import pandas as pd
@@ -26,9 +27,9 @@ cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
 data = []
 
 # Inclination's repetition
-for inclination in range(25, 51, 5):
+for inclination in range(26, 51, 5):
 # Orientation's repetition
-    for orientation in range(5, 360, 30):
+    for orientation in range(5, 360, 20):
         kine1 = InverseKinematics(inclination, orientation)  # instantiate InverseKinematics class
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
@@ -36,7 +37,7 @@ for inclination in range(25, 51, 5):
         motors.setPositions([theta1, theta2, theta3])
 
         # Knowing the Inclination and Orientation of the sensor, with a previous motor position
-        for i in np.arange(0, 5, 0.02):  # time sampling >> steps of 0.02
+        for i in np.arange(0, 2.5, 0.02):  # time sampling >> steps of 0.02
             pitch = mi_sensor.getPitch()
             roll = mi_sensor.getRoll()
             yaw = mi_sensor.getYaw()
@@ -64,4 +65,4 @@ for inclination in range(25, 51, 5):
 
 df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
 print(df)
-df.to_csv(r'/home/humasoft/SOFIA_Python/Data/sensor_motor_prueba2.csv', index = False)
+df.to_csv(r'/home/humasoft/SOFIA_Python/Data/sensor_motor_prueba_peso3.csv', index = False)
