@@ -20,7 +20,7 @@ theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's ca
 
 motors.setupPositionsMode(10, 10)
 # motors.setPositions([theta1, theta2, theta3])
-motors.setPositions([0,0,0])
+motors.setPositions([4.5744747,   0.47841554, -4.19625729])
 
 for i in np.arange(0, 30, 0.02):
     pitch = mi_sensor.getPitch()
