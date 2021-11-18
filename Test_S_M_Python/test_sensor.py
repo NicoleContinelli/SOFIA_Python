@@ -3,6 +3,7 @@ from SystemMotors import SystemMotors
 from InverseKinematics import InverseKinematics
 import math
 import numpy as np
+import pandas as pd
 
 # Knowing the Inclination and Orientation of the sensor, with a prevoius motor position
 
@@ -20,9 +21,13 @@ theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's ca
 
 motors.setupPositionsMode(10, 10)
 # motors.setPositions([theta1, theta2, theta3])
-motors.setPositions([4.5744747,   0.47841554, -4.19625729])
+motors.setPositions([4.40851516,  1.16566086 ,-4.13066421]) #I: 34 O: 126
 
-for i in np.arange(0, 30, 0.02):
+# Parameters of the DataFrame
+cols = ['Inclination', 'Orientation']
+data = []
+
+for i in np.arange(0, 10, 0.02):
     pitch = mi_sensor.getPitch()
     roll = mi_sensor.getRoll()
     yaw = mi_sensor.getYaw()
@@ -44,6 +49,14 @@ for i in np.arange(0, 30, 0.02):
 
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
 
+    # Adding the values of incli, orient and encoders in "data"
+    data.append([incli, orient])
 
 
-#    print("Inclination: " + str(round(incli, 1)) + " Orientation: " + str(round(orient, 1)))
+df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
+print(df)
+df.to_csv(r'/home/humasoft/SOFIA_Python/Data/test_sensor_2-5s.csv', index = False)
+
+
+
+
