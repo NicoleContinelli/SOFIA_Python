@@ -16,12 +16,12 @@ motors.startMotors()  # start motors
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(20, 90)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(34, 126)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
 motors.setupPositionsMode(10, 10)
 # motors.setPositions([theta1, theta2, theta3])
-motors.setPositions([0,0,0]) #I: 34 O: 126
+motors.setPositions([0, 0, 0]) #I: 34 O: 126
 
 # Parameters of the DataFrame
 cols = ['Inclination', 'Orientation']
