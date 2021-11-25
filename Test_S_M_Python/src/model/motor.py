@@ -5,6 +5,7 @@ import CiA402SetupData as CiA402sd
 import Cia402device as Cia402d
 import json as js
 import os
+import numpy as np
 
 
 class Motor:
@@ -37,6 +38,13 @@ class Motor:
 
     def getAmp(self):
         return self.motor.GetAmps()
+    
+    def getFilteredAmps(self, n_samples):
+        data = np.array([])
+        for i in range(n_samples):
+            np.append(data, self.motor.GetAmps())
+        print(data)
+        return np.mean(data)
 
     def getVelocity(self):
         return self.motor.GetVelocity()

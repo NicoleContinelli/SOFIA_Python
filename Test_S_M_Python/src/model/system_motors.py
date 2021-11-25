@@ -43,8 +43,10 @@ class SystemMotors:
             yield motor.getPosition()
 
     def getAmps(self):
-        for motor in self.motorsArray:
-            yield motor.getAmp()
+        return [motor.getAmp() for motor in self.motorsArray]
+            
+    def getFilteredAmps(self, n_samples):
+        return [motor.getFilteredAmps(n_samples) for motor in self.motorsArray]
 
     def getVelocities(self):
         for motor in self.motorsArray:

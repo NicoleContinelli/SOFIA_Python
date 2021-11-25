@@ -1,0 +1,9 @@
+from model.system_motors import SystemMotors
+
+# Motors
+sist = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
+sist.loadMotors([1, 2, 3])  # motor's ids
+sist.startMotors()  # start motors
+
+while(1):
+    print(sist.getFilteredAmps(4))
