@@ -1,5 +1,5 @@
-from SystemMotors import SystemMotors
-from InverseKinematics import InverseKinematics
+from model.system_motors import SystemMotors
+from model.inverse_kinematics import InverseKinematics
 import math
 import numpy as np
 

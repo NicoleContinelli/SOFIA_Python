@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.1, 2021-11-18T15:19:18. -->
+<!-- Written by QtCreator 4.13.1, 2021-11-19T11:39:32. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -734,7 +734,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/humasoft/SOFIA_Python/Test_S_M_Python</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.8">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>

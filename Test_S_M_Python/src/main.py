@@ -4,9 +4,9 @@ import numpy as np
 import pandas as pd
 
 
-from SystemMotors import SystemMotors
-from InverseKinematics import InverseKinematics
-from Sensor import Sensor
+from model.system_motors import SystemMotors
+from model.inverse_kinematics import InverseKinematics
+from model.sensor import Sensor
 
 
 # Motors

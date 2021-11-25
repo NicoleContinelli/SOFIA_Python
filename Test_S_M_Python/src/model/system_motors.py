@@ -1,5 +1,5 @@
 # SystemMotors class, for managing the all motor's encoder at the SAME time
-from Motor import Motor
+from model.motor import Motor
 
 
 class SystemMotors:

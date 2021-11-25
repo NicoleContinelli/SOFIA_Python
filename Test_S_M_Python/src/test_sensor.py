@@ -1,6 +1,6 @@
-from Sensor import Sensor
-from SystemMotors import SystemMotors
-from InverseKinematics import InverseKinematics
+from model.sensor import Sensor
+from model.system_motors import SystemMotors
+from model.inverse_kinematics import InverseKinematics
 import math
 import numpy as np
 import pandas as pd
