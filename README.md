@@ -27,7 +27,7 @@ python3
 - It's important to emphasize that we did this for you to not worry were the libraries are. For instance, you don't need to create Python files in the same library folder, to use them. They are already located in Python globally. It's like using Numpy o Pandas after its installation. 
 
 ## 3. Installation process
-### 3.1 Motors
+### 3.1 Driver library
 - Clone the repo in your home folder 
 - Go to the "CiA402DevicePython" folder, open a terminal there and type:
 ```bash
@@ -47,7 +47,7 @@ python3
 >>> import SocketCanPort 
 ```
 
-### 3.2 Sensor
+### 3.2 Sensor library
 - Go to the "SensorIntegrationPython" folder, open a terminal there and type:
 ```bash
 # giving the permissions to the script to be executed
@@ -65,7 +65,7 @@ python3
 >>> import imu3dmgx510
 ```
 
-## 4. Using the library in an IDE
+## 4. Using the libraries in an IDE
 Only Qt creator had been used for the management of the libraries, performing a series of steps so that it could be executed in the IDE (just for moving a soft robotic articulation). However, recently VS Code has been used and no further steps are required apart from opening the project in the IDE. Basically, we conluded that in can be used in any IDE. 
 
 If you want to use specifically Qt Creator, here is a user's guide to configure it correctly:
