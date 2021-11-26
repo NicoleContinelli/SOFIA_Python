@@ -66,6 +66,10 @@ python3
 ```
 
 ## 4. Using the library in an IDE
+Only Qt creator had been used for the management of the libraries, performing a series of steps so that it could be executed in the IDE (just for moving a soft robotic articulation). However, recently VS Code has been used and no further steps are required apart from opening the project in the IDE. Basically, we conluded that in can be used in any IDE. 
+
+If you want to use specifically Qt Creator, here is a user's guide to configure it correctly:
+
 
 *Now you can start using the library in Python*
 
