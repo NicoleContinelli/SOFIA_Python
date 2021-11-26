@@ -9,7 +9,14 @@ The HUMASOFT project at the time, developed C++ libraries for the movement of Ci
 ```bash
 sudo apt-get install can-utils
 ```
-- Make sure you have a Python version higher than 3.4 installed.
+- Make sure you have a Python version higher than 3.4 installed. Also be sure that this version is the one you are going to use throughout the installation of the libraries, because at the moment you install them, they generate modules that will be saved with the Python version that is by default on your computer (the installation is in point #3). If you have several versions, use only ONE in all this installation process and make sure that on your terminal when you type "python3" is the newest Python version you installed, otherwise, the Python modules may not work.
+```bash
+# verify your Python version 
+python3 --version
+
+# execute Python in terminal
+python3
+```
 - 
 
 
