@@ -24,7 +24,7 @@ python3
 ```
 
 - If your newest Python version isn't the version when you type on your terminal "python3", you can follow this tutorial: https://www.youtube.com/watch?v=hAdympqE9v0
-- It's important to emphasize that we did this for you to not worry were the libraries are. For instance, you don't need to create python files in the same library folder, to use them. They are already located in Python globally. It's like using numpy o pandas after its installation. 
+- It's important to emphasize that we did this for you to not worry were the libraries are. For instance, you don't need to create Python files in the same library folder, to use them. They are already located in Python globally. It's like using numpy o pandas after its installation. 
 
 ## 3. Installation process
 ### 3.1 Motors
