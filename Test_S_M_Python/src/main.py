@@ -28,8 +28,9 @@ data = []
 
 # Inclination's repetition
 for inclination in range(5, 51, 5):
+    #for i in range(10, 31, 10):
 # Orientation's repetition
-    for orientation in range(5, 360, 30):
+    for orientation in range(5, 360, 10):
         kine1 = InverseKinematics(inclination, orientation)  # instantiate InverseKinematics class
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
@@ -57,7 +58,7 @@ for inclination in range(5, 51, 5):
             if orient < 0:
                 orient = abs(orient)
 
-            print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
+            #print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
 
             # Adding the values of incli, orient and encoders in "data"
             data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
@@ -65,4 +66,4 @@ for inclination in range(5, 51, 5):
 
 df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
 print(df)
-df.to_csv(r'/home/humasoft/SOFIA_Python/Data/sensor_motor_prueba_30.csv', index = False)
+df.to_csv(r'/home/humasoft/SOFIA_Python/Data/data_orient10_peso400_izquierda.csv', index = False)
