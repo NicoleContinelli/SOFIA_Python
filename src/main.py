@@ -34,7 +34,7 @@ for inclination in range(5, 51, 5):
         kine1 = InverseKinematics(inclination, orientation)  # instantiate InverseKinematics class
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
-        motors.setupPositionsMode(10, 10)
+        motors.setupPositionsMode(10, 10) # setting velocity and acceleration values
         motors.setPositions([theta1, theta2, theta3])
 
         # Knowing the Inclination and Orientation of the sensor, with a previous motor position
