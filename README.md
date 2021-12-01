@@ -37,7 +37,7 @@ export LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages:$LD_LIBRARY_PATH
 ```
 - After that type Ctrl+O, then Ctrl+X and in terminal the following:
 
-```
+```bash
 # loading the .bashrc
 source .bashrc
 ```
