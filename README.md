@@ -10,6 +10,7 @@ The HUMASOFT project at the time, developed C++ libraries for the movement of Ci
 </p>
 
 ## 2. Stuffs to consider
+<p align="justify">
 - Since these libraries use CAN communication, they need the **can-utils** package. This can only be installed in Linux OS by terminal.
 
 ```bash
@@ -47,9 +48,13 @@ export LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages:$LD_LIBRARY_PATH
 # loading the .bashrc
 source .bashrc
 ```
+</p>
 
 ## 3. Installation process
+<p align="justify">
 You do not need to do anything for the installation, other than run a script where all the packages that are needed will be installed at the time the script is run.
+</p>
+
 ### 3.1 Driver library
 - Clone the repo in your home folder 
 - Go to the "CiA402DevicePython" folder, open a terminal there and type:
@@ -89,7 +94,9 @@ python3
 ```
 
 ## 4. Using the libraries in an IDE
+<p align="justify">
 Only Qt creator had been used for the management of the libraries. To make it worked, we had to perform a series of steps so that the library could be executed in the IDE (just for moving a soft robotic articulation). However, recently VS Code has been used and no further steps are required apart from opening the project in the IDE. 
+</p>
 
 If you want to use specifically Qt Creator, here is a user's guide to configure it correctly:
 
