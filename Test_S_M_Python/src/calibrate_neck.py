@@ -12,12 +12,13 @@ motors.startMotors()  # start motors
 
 pos = [0, 0, 0]  # initial position
 diff = [1, 1, 1]  # difference
+baseCurrent = 40
 
-for i in range(1000):
+for i in range(10000):
     vels = [val for val in motors.getVelocities()]
     if vels < [1, 1, 1] and vels > [-1, -1, -1]:
         amps = motors.getAmps()
-        diff = [(40 - amp)/10000 for amp in amps]
+        diff = [(baseCurrent - amp)/10000 for amp in amps]
         pos = [pos[i] + diff[i] for i in range(len(pos))]
         motors.setupPositionsMode(10, 10)
         motors.setPositions(pos)
