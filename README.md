@@ -32,6 +32,7 @@ python3
 nano .bashrc
 ```
 - Then a window will appear as the picture shows as follows. At the end of it type the following: 
+![LD_LIBRARY_PATH_picture](/images/LD_LIBRARY_PATH_picture.png)
 ```bash
 export LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages:$LD_LIBRARY_PATH
 ```
