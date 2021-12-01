@@ -15,9 +15,9 @@ motors.startMotors()  # start motors
 motors.setupPositionsMode(15, 15) #setting velocity and acceleration values
 motors.setPositions([0, 0, 0]) 
 
-
+'''
 if motors.motorsArray[0].getPosition() != 0:
     motors.motorsArray[0].getPosition() = 0
     
 print(motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition())
-
+'''

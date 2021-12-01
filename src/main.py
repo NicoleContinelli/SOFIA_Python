@@ -66,4 +66,4 @@ for inclination in range(5, 51, 5):
 
 df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
 print(df)
-df.to_csv(r'/home/humasoft/SOFIA_Python/Data/data_orient10_peso600_mas200_izquierda.csv', index = False)
+df.to_csv('/home/humasoft/SOFIA_Python/data/data_orient10_peso600_mas200_izquierda.csv', index = False)
