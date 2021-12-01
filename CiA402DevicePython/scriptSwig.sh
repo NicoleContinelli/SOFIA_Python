@@ -10,6 +10,7 @@
   sudo apt-get install python3-dev
   sudo apt-get install cython3
   sudo apt-get install swig
+  sudo apt-get install g++
   
   swig -c++ -python PortBase.i
   python3 setupPortBase.py build_ext --inplace

@@ -12,6 +12,7 @@
   sudo pip install cython
   sudo apt-get install swig
   sudo apt-get install libboost-all-dev
+  sudo apt-get install g++
   sudo chmod a+rw /dev/ttyUSB0
   
   swig -c++ -python SerialComm.i
