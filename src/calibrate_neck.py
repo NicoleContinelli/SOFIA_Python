@@ -20,7 +20,7 @@ for i in range(10000):
         amps = motors.getAmps()
         diff = [(baseCurrent - amp)/10000 for amp in amps]
         pos = [pos[i] + diff[i] for i in range(len(pos))]
-        motors.setupPositionsMode(10, 10)
+        motors.setupPositionsMode(15, 15)
         motors.setPositions(pos)
 
 pos = [val for val in motors.getPositions()]
