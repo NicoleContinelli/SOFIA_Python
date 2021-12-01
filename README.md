@@ -25,6 +25,22 @@ python3
 
 - If your newest Python version isn't the version when you type on your terminal "python3", you can follow this tutorial: https://www.youtube.com/watch?v=hAdympqE9v0
 - It's important to emphasize that we did this for you to not worry were the libraries are. For instance, you don't need to create Python files in the same library folder, to use them. They are already located in Python globally. It's like using Numpy o Pandas after its installation. 
+- Lastly, you will need configure the environment variable LD_LIBRARY_PATH:
+
+```bash
+# edit the bashrc file 
+nano .bashrc
+```
+- Then a window will appear as the picture shows as follows. At the end of it type the following: 
+```bash
+export LD_LIBRARY_PATH=/usr/local/lib/python3.8/dist-packages:$LD_LIBRARY_PATH
+```
+- After that type Ctrl+O, then Ctrl+X and in terminal the following:
+
+```
+# loading the .bashrc
+source .bashrc
+```
 
 ## 3. Installation process
 You do not need to do anything for the installation, other than run a script where all the packages that are needed will be installed at the time the script is run.
