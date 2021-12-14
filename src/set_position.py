@@ -13,7 +13,7 @@ motors.loadMotors([3])  # motor's ids
 motors.startMotors()  # start motors
 
 motors.setupPositionsMode(12, 12) #setting velocity and acceleration values
-motors.setPositions([9.42]) 
+motors.setPositions([22]) 
 
 '''
 if motors.motorsArray[0].getPosition() != 0:
