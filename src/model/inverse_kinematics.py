@@ -16,8 +16,8 @@ class InverseKinematics:
         # Kinematics parameters
         a = 0.045  # m distance between A and base
         b = 0.045  # m distance between B and mobile platform
-        L0 = 0.118  # Neck Lenght
-        radious = 0.0075  # Radious of the motor
+        L0 = 0.116+0.09  # Neck Lenght
+        radious = 0.0065  # Radious of the motor
         theta = self.incli
 
         if (self.incli == 0):
