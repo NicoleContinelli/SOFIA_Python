@@ -9,11 +9,11 @@ import pandas as pd
 
 # Motors
 motors = SystemMotors(1)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([3])  # motor's ids
+motors.loadMotors([2])  # motor's ids
 motors.startMotors()  # start motors
 
 motors.setupPositionsMode(12, 12) #setting velocity and acceleration values
-motors.setPositions([22]) 
+motors.setPositions([0]) 
 
 '''
 if motors.motorsArray[0].getPosition() != 0:
