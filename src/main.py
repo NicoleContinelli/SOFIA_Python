@@ -63,7 +63,7 @@ for inclination in range(5, 51, 5):
             data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
     df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
     #print(df)
-    df.to_csv('/home/humasoft/SOFIA_Python/data/data_january/data_orient10_peso600_centro.csv', index = False)
+    df.to_csv('/home/humasoft/SOFIA_Python/data/data_january/data_orient10_peso700_centro.csv', index = False)
     df.info()
             
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
