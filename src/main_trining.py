@@ -10,7 +10,7 @@ from model.sensor import Sensor
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([1, 2, 3])  # motor's ids
+motors.loadMotors([2, 3, 1])  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
@@ -27,14 +27,14 @@ data = []
 motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
 
 #Load the data with the predicted values
-data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_optparams.csv')
+data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN.csv')
 
 
 # Inclination's repetition
-for inclination in range(10, 51, 10):
+for inclination in range(5, 51, 5):
    
 # Orientation's repetition
-    for orientation in range(5, 360, 45):
+    for orientation in range(5, 360, 10):
 
         row = data_pred[data_pred['I'] == inclination] [data_pred['O'] == orientation] #row with the predicted encoders
         
@@ -72,7 +72,7 @@ for inclination in range(10, 51, 10):
             data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
     df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
     #print(df)
-    df.to_csv('/home/humasoft/SOFIA_Python/data/data_january/dataANN_orient10.csv', index = False)
+    df.to_csv('/home/humasoft/SOFIA_Python/data/data_february/dataANN_orient10.csv', index = False)
     df.info()
             
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))

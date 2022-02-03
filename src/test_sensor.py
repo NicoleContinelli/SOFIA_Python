@@ -27,7 +27,7 @@ motors.setPositions([0, 0, 0]) #I: 34 O: 126
 cols = ['Inclination', 'Orientation']
 data = []
 
-for i in np.arange(0, 10, 0.02):
+for i in np.arange(0, 30, 0.02):
     pitch = mi_sensor.getPitch()
     roll = mi_sensor.getRoll()
     yaw = mi_sensor.getYaw()
