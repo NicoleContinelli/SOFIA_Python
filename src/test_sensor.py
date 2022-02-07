@@ -9,7 +9,7 @@ import pandas as pd
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([1, 2, 3])  # motor's ids
+motors.loadMotors([2, 3, 1])  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
@@ -21,7 +21,7 @@ theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's ca
 
 motors.setupPositionsMode(10, 10) 
 # motors.setPositions([theta1, theta2, theta3])
-motors.setPositions([0, 0, 0]) #I: 34 O: 126
+motors.setPositions([-0.46062334,  5.32856257, -2.68204512]) #I: 34 O: 126
 
 # Parameters of the DataFrame
 cols = ['Inclination', 'Orientation']
