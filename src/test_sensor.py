@@ -21,7 +21,7 @@ theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's ca
 
 motors.setupPositionsMode(10, 10) 
 # motors.setPositions([theta1, theta2, theta3])
-motors.setPositions([-0.46062334,  5.32856257, -2.68204512]) #I: 34 O: 126
+motors.setPositions([-0.91180212, -0.72023127,  2.07622717]) #I: 34 O: 126
 
 # Parameters of the DataFrame
 cols = ['Inclination', 'Orientation']

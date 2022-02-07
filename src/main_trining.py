@@ -27,11 +27,11 @@ data = []
 motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
 
 #Load the data with the predicted values
-data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_optparams.csv')
+data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_3files.csv')
 
 
 # Inclination's repetition
-for inclination in range(5, 51, 5):
+for inclination in range(5, 41, 5):
    
 # Orientation's repetition
     for orientation in range(5, 360, 10):
@@ -72,7 +72,7 @@ for inclination in range(5, 51, 5):
             data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
     df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
     #print(df)
-    df.to_csv('/home/humasoft/SOFIA_Python/data/data_february/dataANN_optparams_orient10_v2.csv', index = False)
+    df.to_csv('/home/humasoft/SOFIA_Python/data/data_february/dataANN_orient10_3files.csv', index = False)
     df.info()
             
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
