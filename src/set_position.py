@@ -1,4 +1,3 @@
-from model.sensor import Sensor
 from model.system_motors import SystemMotors
 from model.inverse_kinematics import InverseKinematics
 import math
