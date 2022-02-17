@@ -1,0 +1,1 @@
+incli = int(input("Digita la inclinacion: "))
