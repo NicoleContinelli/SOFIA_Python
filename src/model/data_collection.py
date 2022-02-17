@@ -2,8 +2,6 @@ import math
 import numpy as np
 import pandas as pd
 
-
-
 class DataCollection:
 
     def __init__(self):
