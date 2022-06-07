@@ -28,17 +28,17 @@
   python3 setupCia402device.py build_ext --inplace
   
   
-  sudo mv PortBase.py /usr/local/lib/python3.8/dist-packages
-  sudo mv SocketCanPort.py /usr/local/lib/python3.8/dist-packages
-  sudo mv CiA301CommPort.py /usr/local/lib/python3.8/dist-packages
-  sudo mv CiA402SetupData.py /usr/local/lib/python3.8/dist-packages
-  sudo mv Cia402device.py /usr/local/lib/python3.8/dist-packages
+  sudo mv PortBase.py /usr/local/lib/python3.10/dist-packages
+  sudo mv SocketCanPort.py /usr/local/lib/python3.10/dist-packages
+  sudo mv CiA301CommPort.py /usr/local/lib/python3.10/dist-packages
+  sudo mv CiA402SetupData.py /usr/local/lib/python3.10/dist-packages
+  sudo mv Cia402device.py /usr/local/lib/python3.10/dist-packages
 
-  sudo mv _PortBase.so /usr/local/lib/python3.8/dist-packages
-  sudo mv _SocketCanPort.so /usr/local/lib/python3.8/dist-packages
-  sudo mv _CiA301CommPort.so /usr/local/lib/python3.8/dist-packages
-  sudo mv _CiA402SetupData.so /usr/local/lib/python3.8/dist-packages
-  sudo mv _Cia402device.so /usr/local/lib/python3.8/dist-packages
+  sudo mv _PortBase.so /usr/local/lib/python3.10/dist-packages
+  sudo mv _SocketCanPort.so /usr/local/lib/python3.10/dist-packages
+  sudo mv _CiA301CommPort.so /usr/local/lib/python3.10/dist-packages
+  sudo mv _CiA402SetupData.so /usr/local/lib/python3.10/dist-packages
+  sudo mv _Cia402device.so /usr/local/lib/python3.10/dist-packages
   
   
   
