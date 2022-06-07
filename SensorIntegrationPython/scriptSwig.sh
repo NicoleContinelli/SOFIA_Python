@@ -26,10 +26,10 @@
   echo swig -c++ -python imu3dmgx510.i
   echo python3 setupimu3dmgx510.py build_ext --inplace
   
-  sudo cp SerialComm.py /usr/local/lib/python3.8/dist-packages
-  sudo cp attitude_estimator.py /usr/local/lib/python3.8/dist-packages
-  sudo cp imu3dmgx510.py /usr/local/lib/python3.8/dist-packages
+  sudo cp SerialComm.py /usr/local/lib/python3.10/dist-packages
+  sudo cp attitude_estimator.py /usr/local/lib/python3.10/dist-packages
+  sudo cp imu3dmgx510.py /usr/local/lib/python3.10/dist-packages
 
-  sudo cp _SerialComm.so /usr/local/lib/python3.8/dist-packages
-  sudo cp _attitude_estimator.so /usr/local/lib/python3.8/dist-packages
-  sudo cp _imu3dmgx510.so /usr/local/lib/python3.8/dist-packages
+  sudo cp _SerialComm.so /usr/local/lib/python3.10/dist-packages
+  sudo cp _attitude_estimator.so /usr/local/lib/python3.10/dist-packages
+  sudo cp _imu3dmgx510.so /usr/local/lib/python3.10/dist-packages
