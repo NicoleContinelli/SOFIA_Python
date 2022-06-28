@@ -9,7 +9,7 @@ import pandas as pd
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([2, 3, 1])  # motor's ids
+motors.loadMotors([3, 1, 2])  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
@@ -19,8 +19,8 @@ mi_sensor.sensorStream()
 kine1 = InverseKinematics(34, 126)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
-motors.setupPositionsMode(10, 10) 
-motors.setPositions([theta1, theta2, theta3])
+#motors.setupPositionsMode(10, 10) 
+#motors.setPositions([theta1, theta2, theta3])
 #motors.setPositions([-0.91180212, -0.72023127,  2.07622717]) #I: 34 O: 126
 
 # Parameters of the DataFrame
@@ -42,10 +42,10 @@ for i in np.arange(0, 30, 0.02):
 
     # Conditions for having 360 degrees in orientation
     if orient > 0:
-        orient = 359 - orient
+        orient = orient
 
     if orient < 0:
-        orient = abs(orient)
+        orient = 360 - abs(orient)
 
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
 

@@ -35,10 +35,12 @@ class DataCollection:
 
         # Conditions for having 360 degrees in orientation
         if self.orient > 0:
-            self.orient = 359 - self.orient
+            self.orient = 360 - self.orient
 
         if self.orient < 0:
             self.orient = abs(self.orient)
+            
+            
 
         
         return self.incli, self.orient

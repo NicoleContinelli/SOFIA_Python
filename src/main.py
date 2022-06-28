@@ -11,7 +11,7 @@ from model.sensor import Sensor
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([2, 3, 1])  # motor's ids
+motors.loadMotors([3, 1, 2])  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
@@ -27,10 +27,10 @@ cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
 data = []
 motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
 # Inclination's repetition
-for inclination in range(5, 51, 5):
+for inclination in range(15, 51, 10):
     #for i in range(10, 31, 10):
 # Orientation's repetition
-    for orientation in range(5, 361, 10):
+    for orientation in range(5, 361, 30):
         kine1 = InverseKinematics(inclination, orientation)  # instantiate InverseKinematics class
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
@@ -50,12 +50,12 @@ for inclination in range(5, 51, 5):
             incli = math.sqrt(pitch**2 + roll**2) * (180 / math.pi)
             orient = ((math.atan2(roll, pitch) * (180 / math.pi)))
 
-            # Conditions for having 360 degrees in orientation
+            # Conditions for having 360 degrees in orientation (nueva posicion sensor)
             if orient > 0:
-                orient = 359 - orient
+                orient = orient
 
             if orient < 0:
-                orient = abs(orient)
+                orient = 360 - abs(orient)
 
             print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
 
