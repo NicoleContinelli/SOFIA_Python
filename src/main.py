@@ -11,7 +11,7 @@ from model.sensor import Sensor
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([3, 1, 2])  # motor's ids
+motors.loadMotors([1, 2, 3])  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
@@ -25,12 +25,12 @@ inclination = 0
 # Parameters of the DataFrame
 cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
 data = []
-motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
+motors.setupPositionsMode(15, 15) # setting velocity and acceleration values
 # Inclination's repetition
-for inclination in range(15, 51, 10):
+for inclination in range(5, 51, 5):
     #for i in range(10, 31, 10):
 # Orientation's repetition
-    for orientation in range(5, 361, 30):
+    for orientation in range(5, 361, 10):
         kine1 = InverseKinematics(inclination, orientation)  # instantiate InverseKinematics class
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
@@ -63,7 +63,7 @@ for inclination in range(15, 51, 10):
             data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
     df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
     #print(df)
-    df.to_csv('/home/humasoft/SOFIA_Python/data/data_february/data_orient10_v3.csv', index = False)
+    df.to_csv('/home/sofia/SOFIA_Python/data/data_july/data_orient10.csv', index = False)
     df.info()
             
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
