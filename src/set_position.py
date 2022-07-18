@@ -14,6 +14,6 @@ motors.startMotors()  # start motors
 
 motors.setupPositionsMode(12, 12) #setting velocity and acceleration values
 motors.setPositions([0, 0, 0])
-time.sleep(5)
+time.sleep(2)
 pos=motors.motorsArray[0].getPosition()
 print(pos)

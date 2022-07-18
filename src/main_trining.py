@@ -61,10 +61,10 @@ for inclination in range(5, 41, 5):
 
             # Conditions for having 360 degrees in orientation
             if orient > 0:
-                orient = 359 - orient
+               orient = orient
 
             if orient < 0:
-                orient = abs(orient)
+               orient = 360 - abs(orient)
 
             print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
 

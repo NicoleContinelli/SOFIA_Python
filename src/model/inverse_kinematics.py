@@ -34,15 +34,26 @@ class InverseKinematics:
         t22 = math.pow(math.cos(phi),2) + math.cos(theta) * math.pow(math.sin(phi),2)
         t33 = math.cos(theta)
 
-        matrix_A = np.matrix([[0, (-math.sqrt(3)*a/2), (math.sqrt(3)*a/2)],
-                             [a, -0.5*a, -0.5*a],
-                             [0, 0, 0],
-                             [1, 1, 1]])
-        matrix_B = np.matrix([[0, (-math.sqrt(3)*b/2), (math.sqrt(3)*b/2)],
-                             [b, -0.5*b, -0.5*b],
-                             [0, 0, 0],
-                             [1, 1, 1]])
+        #new position of the sensor
+        matrix_A = np.matrix([[-a,                 0.5*a,              0.5*a],
+                             [  0, (-(math.sqrt(3)*a/2)), (math.sqrt(3)*a/2)],
+                             [  0,                     0,                  0],
+                             [  1,                     1,                  1]])
 
+        matrix_B = np.matrix([[-b,                 0.5*b,              0.5*b],
+                             [  0, (-(math.sqrt(3)*b/2)), (math.sqrt(3)*b/2)],
+                             [  0,                     0,                  0],
+                             [  1,                     1,                  1]])
+        '''
+        matrix_A = np.matrix([[0, (-math.sqrt(3)*a/2), (math.sqrt(3)*a/2)],
+                             [ a,               -0.5*a,            -0.5*a],
+                             [ 0,                    0,                 0],
+                             [ 1,                    1,                 1]])
+        matrix_B = np.matrix([[0, (-math.sqrt(3)*b/2), (math.sqrt(3)*b/2)],
+                             [ b,              -0.5*b,             -0.5*b],
+                             [ 0,                   0,                  0],
+                             [ 1,                   1,                 1]])
+        '''
         # Rotational Matrix
         matrix_R = np.matrix([[t11, t12, t13],
                              [t21, t22, t23],

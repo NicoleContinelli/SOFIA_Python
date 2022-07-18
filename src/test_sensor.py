@@ -9,25 +9,25 @@ import pandas as pd
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([3, 1, 2])  # motor's ids
+motors.loadMotors([1, 2, 3])  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(34, 126)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(20, 0)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
-#motors.setupPositionsMode(10, 10) 
-#motors.setPositions([theta1, theta2, theta3])
+motors.setupPositionsMode(12, 12) 
+motors.setPositions([theta1, theta2, theta3])
 #motors.setPositions([-0.91180212, -0.72023127,  2.07622717]) #I: 34 O: 126
 
 # Parameters of the DataFrame
 cols = ['Inclination', 'Orientation']
 data = []
 
-for i in np.arange(0, 30, 0.02):
+for i in np.arange(0, 3, 0.02):
     pitch = mi_sensor.getPitch()
     roll = mi_sensor.getRoll()
     yaw = mi_sensor.getYaw()
