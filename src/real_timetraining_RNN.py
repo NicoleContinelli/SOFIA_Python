@@ -27,10 +27,10 @@ data_col = DataCollection() #instantiate DataCollection class
 motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
 
 #Load the data with the predicted values
-data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_3files_optparams.csv')
+data_pred = pd.read_csv('/home/sofia/SOFIA_Python/ml/predicted_data_ANN_3files_optparams.csv')
 
 #ML
-model_reg = joblib.load('/home/humasoft/trained_model_reg_optiparam.pkl')
+model_reg = joblib.load('/home/sofia/trained_model_reg_optiparam.pkl')
 
 #Target Values
 inclination = int(input("Digit inclination: "))
