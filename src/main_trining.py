@@ -31,7 +31,7 @@ motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
 #data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_3files_optparams.csv')
 
 #ML
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/trained_model20_reg_NN1.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/trained_model8_reg_NN.pkl')
 
 
 # Inclination's repetition
@@ -82,7 +82,7 @@ for inclination in range(5, 41, 5):
             data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
     df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
     #print(df)
-    df.to_csv('/home/sofia/SOFIA_Python/data/data_september/data_model20_NN1.csv', index = False)
+    df.to_csv('/home/sofia/SOFIA_Python/data/data_september/data_model8_NN.csv', index = False)
     df.info()
             
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))

@@ -27,7 +27,7 @@ cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
 data = []
 motors.setupPositionsMode(15, 15) # setting velocity and acceleration values
 # Inclination's repetition
-for inclination in range(5, 51, 5):
+for inclination in range(5, 41, 5):
     #for i in range(10, 31, 10):
 # Orientation's repetition
     for orientation in range(5, 361, 10):
