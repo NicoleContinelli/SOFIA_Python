@@ -16,7 +16,7 @@ motors.startMotors()  # start motors
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(20, 0)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(30, 90)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
 motors.setupPositionsMode(12, 12) 

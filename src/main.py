@@ -27,10 +27,10 @@ cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
 data = []
 motors.setupPositionsMode(15, 15) # setting velocity and acceleration values
 # Inclination's repetition
-for inclination in range(5, 41, 5):
+for inclination in range(5, 41, 15):
     #for i in range(10, 31, 10):
 # Orientation's repetition
-    for orientation in range(5, 361, 10):
+    for orientation in range(5, 361, 30):
         kine1 = InverseKinematics(inclination, orientation)  # instantiate InverseKinematics class
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
