@@ -31,7 +31,7 @@ motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
 #data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_3files_optparams.csv')
 
 #ML
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/trained_model2.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/trained_model2_v2.pkl')
 
 
 # Inclination's repetition
