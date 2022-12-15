@@ -16,7 +16,7 @@ motors.startMotors()  # start motors
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(30, 90)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(38.93, 197.03)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
 motors.setupPositionsMode(12, 12) 
@@ -27,7 +27,7 @@ motors.setPositions([theta1, theta2, theta3])
 cols = ['Inclination', 'Orientation']
 data = []
 
-for i in np.arange(0, 3, 0.02):
+for i in np.arange(0, 5, 0.02):
     pitch = mi_sensor.getPitch()
     roll = mi_sensor.getRoll()
     yaw = mi_sensor.getYaw()
