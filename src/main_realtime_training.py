@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import pandas as pd
-import joblib  
+import joblib
 import time
 
 from model.system_motors import SystemMotors
@@ -21,40 +21,28 @@ mi_sensor.sensorStream()  # enable sensor
 # Parameters of the DataFrame
 data = []
 cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
-data_col = DataCollection() #instantiate DataCollection class
-motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
+data_col = DataCollection()  # instantiate DataCollection class
+motors.setupPositionsMode(12, 12)  # setting velocity and acceleration values
 
-#Load the data with the predicted values
-data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_3files_optparams.csv')
+# Load the data with the predicted values
+data_pred = pd.read_csv(
+    '/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_3files_optparams.csv')
 
-#ML
+# ML
 model_reg = joblib.load('/home/humasoft/trained_model_reg_optiparam.pkl')
 
-#Target Values
+# Target Values
 inclination = int(input("Digit inclination: "))
 orientation = int(input("Digit orientation: "))
 error_i = 5
 error_o = 5
 
-'''
-#row with the predicted encoders
-row = data_pred[data_pred['I'] == 10] [data_pred['O'] == 45]
-print(row)
 
-
-# Set theta values >> looking for them in the "row" variable
-theta1 = row.iloc[0,2] 
-theta2 = row.iloc[0,3]
-theta3 = row.iloc[0,4]
-
-motors.setPositions([theta1, theta2, theta3])
-time.sleep(3)
-'''
-
-#in angles
-while(np.abs(error_i) > 0.8 or np.abs(error_o) > 7.2):
-    sensor_data = data_col.data_neck_sensor(mi_sensor) # calling data_neck_sensor function (passing fromr radians to degrees)
-    sensor_data_final = list(sensor_data) # converting a tuple to list
+# in angles
+while (np.abs(error_i) > 0.8 or np.abs(error_o) > 7.2):
+    # calling data_neck_sensor function (passing fromr radians to degrees)
+    sensor_data = data_col.data_neck_sensor(mi_sensor)
+    sensor_data_final = list(sensor_data)  # converting a tuple to list
     print(sensor_data_final)
     error_i = (inclination - sensor_data_final[0])
     sensor_data_final[0] += error_i
@@ -62,29 +50,25 @@ while(np.abs(error_i) > 0.8 or np.abs(error_o) > 7.2):
     error_o = (orientation - sensor_data_final[1])
     sensor_data_final[1] += error_o
 
-    #print(error_i,error_o)
 
-    pred = model_reg.predict([[sensor_data_final[0],sensor_data_final[1]]])
+    pred = model_reg.predict([[sensor_data_final[0], sensor_data_final[1]]])
     thetas = pred.flatten().tolist()
-    #print(sensor_data_final[0], sensor_data_final[1], thetas)
 
     motors.setPositions([thetas[0], thetas[1], thetas[2]])
 
-    motor_data = data_col.data_neck_motors(motors) # calling data_neck_motors function (collecting the encoders values)
-    motor_data_final = list(motor_data) # converting a tuple to list
+    # calling data_neck_motors function (collecting the encoders values)
+    motor_data = data_col.data_neck_motors(motors)
+    motor_data_final = list(motor_data)  # converting a tuple to list
 
-    data.append([sensor_data_final[0], 
-                    sensor_data_final[1], 
-                    motor_data_final[0], 
-                    motor_data_final[1], 
-                    motor_data_final[2]])
+    data.append([sensor_data_final[0],
+                 sensor_data_final[1],
+                 motor_data_final[0],
+                 motor_data_final[1],
+                 motor_data_final[2]])
 
-    df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
-    df.to_csv('/home/humasoft/SOFIA_Python/data/data_february/data_ANN_3files_optparams_control.csv', index = False)
-    #df.info() or print(df)
-    #print(df)
-    
-
+    # adding the data values (array type), to the data frame
+    df = pd.DataFrame(data, columns=cols)
+    df.to_csv(
+        '/home/humasoft/SOFIA_Python/data/data_february/data_ANN_3files_optparams_control.csv', index=False)
+        
 print("Data Ready")
-
-

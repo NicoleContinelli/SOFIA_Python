@@ -2,6 +2,7 @@ import math
 import numpy as np
 import pandas as pd
 
+
 class DataCollection:
 
     def __init__(self):
@@ -17,8 +18,8 @@ class DataCollection:
         self.incli = np.double()
         self.orient = np.double()
 
+    # Returning inclination and orientation of the neck in Degrees
 
-    # Returning inclination and orientation of the neck in Degrees 
     def data_neck_sensor(self, mi_sensor):
 
         self.pitch = mi_sensor.getPitch()
@@ -39,10 +40,7 @@ class DataCollection:
 
         if self.orient < 0:
             self.orient = abs(self.orient)
-            
-            
 
-        
         return self.incli, self.orient
 
     # Returning the encoders value

@@ -17,7 +17,8 @@ class SystemMotors:
         assert self.numMotors == len(index)
 
         for i in index:
-            self.motorsArray.append(Motor(i, "SoftNeckMotorConfig.json")) # calling the "Motor" class
+            # calling the "Motor" class
+            self.motorsArray.append(Motor(i, "SoftNeckMotorConfig.json"))
 
     # These methods are the same as in the "Motor" class, but know the actions are executed for ALL the motors at a time
     def startMotors(self):
@@ -44,7 +45,7 @@ class SystemMotors:
 
     def getAmps(self):
         return [motor.getAmp() for motor in self.motorsArray]
-            
+
     def getFilteredAmps(self, n_samples):
         return [motor.getFilteredAmps(n_samples) for motor in self.motorsArray]
 

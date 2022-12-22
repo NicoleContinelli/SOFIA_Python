@@ -20,15 +20,14 @@ class DirectKinematics:
         L0 = 0.116 + 0.09  # Neck Lenght
         radious = 0.0065  # Radious of the motor
 
-
-        #lengths
+        # lengths
         L1 = L0 - (self.theta1 * radious)
         L2 = L0 - (self.theta2 * radious)
         L3 = L0 - (self.theta3 * radious)
 
-        orient = abs(np.degrees(math.atan(((L3+L2)-(2*L1))/(math.sqrt(3)*(L2-L3)))))
-        incli = abs(np.degrees(2 * math.asin(((L2-L3)/(2*math.sqrt(3)*a*math.cos(np.radians(orient)))))))
+        orient = abs(np.degrees(
+            math.atan(((L3+L2)-(2*L1))/(math.sqrt(3)*(L2-L3)))))
+        incli = abs(np.degrees(
+            2 * math.asin(((L2-L3)/(2*math.sqrt(3)*a*math.cos(np.radians(orient)))))))
 
         return incli, orient
-
-

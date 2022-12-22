@@ -12,8 +12,8 @@ motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
 motors.loadMotors([1, 2, 3])  # motor's ids
 motors.startMotors()  # start motors
 
-motors.setupPositionsMode(12, 12) #setting velocity and acceleration values
+motors.setupPositionsMode(12, 12)  # setting velocity and acceleration values
 motors.setPositions([0, 0, 0])
 time.sleep(2)
-pos=motors.motorsArray[0].getPosition()
+pos = motors.motorsArray[0].getPosition()
 print(pos)

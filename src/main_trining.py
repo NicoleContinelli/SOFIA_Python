@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import pandas as pd
-import joblib 
+import joblib
 
 
 from model.system_motors import SystemMotors
@@ -25,67 +25,40 @@ inclination = 0
 # Parameters of the DataFrame
 cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
 data = []
-motors.setupPositionsMode(12, 12) # setting velocity and acceleration values
+motors.setupPositionsMode(12, 12)  # setting velocity and acceleration values
 
-#Load the data with the predicted values
-#data_pred = pd.read_csv('/home/humasoft/SOFIA_Python/ml/predicted_data_ANN_3files_optparams.csv')
-
-#ML
+# ML
 model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/trained_model2_v3.pkl')
 
 
 # Inclination's repetition
 for inclination in range(5, 36, 5):
-   
-# Orientation's repetition
+
+    # Orientation's repetition
     for orientation in range(1, 361, 10):
 
-        '''
-        row = data_pred[data_pred['I'] == inclination] [data_pred['O'] == orientation] #row with the predicted encoders
-        
-        # Set theta values >> looking for them in the "row" variable
-        theta1 = row.iloc[0,2] 
-        theta2 = row.iloc[0,3]
-        theta3 = row.iloc[0,4]
-        motors.setPositions([theta1, theta2, theta3])
-        '''
-    
-        pred = model_reg.predict([[inclination,orientation]])
+        pred = model_reg.predict([[inclination, orientation]])
         thetas = pred.flatten().tolist()
         motors.setPositions([thetas[0], thetas[1], thetas[2]])
 
         # Knowing the Inclination and Orientation of the sensor, with a previous motor position
         for i in np.arange(0, 2, 0.02):  # time sampling >> steps of 0.02
-            pitch = mi_sensor.getPitch()
-            roll = mi_sensor.getRoll()
-            yaw = mi_sensor.getYaw()
+            incli, orient = mi_sensor.readSensor(mi_sensor)
 
-            cos_p = math.cos(pitch)
-            cos_r = math.cos(roll)
-            sen_p = math.sin(pitch)
-            sen_r = math.sin(roll)
-
-            incli = math.sqrt(pitch**2 + roll**2) * (180 / math.pi)
-            orient = ((math.atan2(roll, pitch) * (180 / math.pi)))
-
-            # Conditions for having 360 degrees in orientation
-            if orient > 0:
-                orient = orient
-
-            if orient < 0:
-                orient = 360 - abs(orient)
-            
-            #print("Inclination: ", inclination, " Orientation: ", orientation)
-            print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
+            print("Inclination: ", round(incli, 1),
+                  " Orientation: ", round(orient, 1))
 
             # Adding the values of incli, orient and encoders in "data"
-            data.append([incli, orient, motors.motorsArray[0].getPosition(), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
-    df = pd.DataFrame(data, columns = cols)  # adding the data values (array type), to the data frame
-    #print(df)
-    df.to_csv('/home/sofia/SOFIA_Python/ml/RIAI_Models/data_model12_reg_Tanh_v3.csv', index = False)
+            data.append([incli, orient, motors.motorsArray[0].getPosition(
+            ), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
+
+    # adding the data values (array type), to the data frame
+    df = pd.DataFrame(data, columns=cols)
+    # print(df)
+    df.to_csv(
+        '/home/sofia/SOFIA_Python/ml/RIAI_Models/data_model12_reg_Tanh_v3.csv', index=False)
     df.info()
-            
+
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
 
 print("Data Ready")
-
