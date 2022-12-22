@@ -22,7 +22,6 @@ theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's ca
 motors.setupPositionsMode(12, 12)
 motors.setPositions([theta1, theta2, theta3])
 
-
 for i in np.arange(0, 5, 0.02):
     inclination, orientation = mi_sensor.readSensor(
         mi_sensor)  # new method of teh sensor class
