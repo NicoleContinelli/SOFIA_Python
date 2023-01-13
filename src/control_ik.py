@@ -53,8 +53,8 @@ while (error > 0.02):
     motors.setPositions([theta1, theta2, theta3])
 
     for i in np.arange(0, 0.04, 0.02):
-        ik_inlci, ik_orient = mi_sensor.readSensor(mi_sensor)
+        ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
         # print("Inclination: ", round(ik_inlci, 1), " Orientation: ", round(ik_orient, 1))
-        print("error Inclination: ", round(incli_target-ik_inlci, 1),
+        print("error Inclination: ", round(incli_target - ik_incli, 1),
               " error Orientation: ", round(orient_target - ik_orient, 1))

@@ -28,9 +28,9 @@ data = []
 motors.setupPositionsMode(15, 15)  # setting velocity and acceleration values
 
 # Inclination's repetition
-for inclination in range(5, 26, 5):
+for inclination in range(5, 36, 5):
     # Orientation's repetition
-    for orientation in range(5, 361, 20):
+    for orientation in range(5, 361, 10):
         # instantiate InverseKinematics class
         kine1 = InverseKinematics(inclination, orientation)
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
@@ -52,7 +52,7 @@ for inclination in range(5, 26, 5):
     df = pd.DataFrame(data, columns=cols)
     # print(df)
     df.to_csv(
-        '/home/sofia/SOFIA_Python/data/data_november22/data_orient10_v2.csv', index=False)
+        '/home/sofia/SOFIA_Python/data/Data_2023/data_january/data_orient10_MASTER.csv', index=False)
     df.info()
 
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
