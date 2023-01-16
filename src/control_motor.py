@@ -7,6 +7,9 @@ import pandas as pd
 import joblib
 
 
+import matplotlib.pyplot as plt
+
+
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
 motors.loadMotors([1, 2, 3])  # motor's ids
@@ -17,7 +20,7 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 28
+incli_target = 20
 orient_target = 200
 
 # Instantiate InverseKinematics class
@@ -33,9 +36,14 @@ ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 # Model trained
 model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V1.pkl')
 
-error = 0.03
+# For plotting the graph
+incli_data = []
+orient_data = []
 
-while (error > 0.02):
+#while (time < 20):
+for time in np.arange(0,15,0.02):
+    time =+ time
+    print(time)
     # Calculate the Inclination and Orientation sensor error
     error_i = incli_target - ik_incli
     error_o = orient_target - ik_orient
@@ -67,9 +75,28 @@ while (error > 0.02):
 
     # Reading sensor again
     ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
+    incli_data.append(ik_incli)
+    orient_data.append(ik_orient)
 
     print("Inclination: ", round(ik_incli, 1),
             " Orientation: ", round(ik_orient, 1))
 
-    '''print("error Inclination: ", round(incli_target - ik_incli, 1),
+y_axis_i = incli_data
+y_axis_o = orient_data
+
+fig, axs = plt.subplots(2)
+axs[0].plot(y_axis_i, color='purple')
+axs[0].set_title('Inclination Control')
+
+axs[1].plot(y_axis_o, color='orange')
+axs[1].set_title('Orientation Control')
+
+plt.xlabel('Time (s)')
+plt.ylabel('Degrees')
+plt.show()
+
+
+'''print("error Inclination: ", round(incli_target - ik_incli, 1),
             " error Orientation: ", round(orient_target - ik_orient, 1))'''
+
+
