@@ -17,7 +17,7 @@ data_col = DataCollection()  # instantiate DataCollection class
 
 
 # Load the data with the predicted values
-data_target = pd.read_csv('/home/sofia/SOFIA_Python/data/Data_2023/data_january/data_rectified.csv')
+data_target = pd.read_csv('/home/sofia/SOFIA_Python/data/Data_2023/data_january/data_rectified_MASTER_V1.csv')
 
 
 for i in range(len(data_target)):
@@ -30,6 +30,6 @@ for i in range(len(data_target)):
 # adding the data values (array type), to the data frame
 df = pd.DataFrame(thetas_rectified, columns=cols)
 df.to_csv(
-        '/home/sofia/SOFIA_Python/data/Data_2023/data_january/data_rectified_thetas_IK.csv', index=False)
+        '/home/sofia/SOFIA_Python/data/Data_2023/data_january/data_rectified_thetasIK_MASTER_V1.csv.csv', index=False)
         
 print("Data Ready")

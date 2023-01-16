@@ -28,6 +28,9 @@ data = []
 motors.setupPositionsMode(15, 15)  # setting velocity and acceleration values
 
 # Inclination's repetition
+motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
+motors.loadMotors([1, 2, 3])  # motor's ids
+motors.startMotors()  # start m
 for inclination in range(5, 36, 5):
     # Orientation's repetition
     for orientation in range(5, 361, 10):

@@ -18,7 +18,7 @@ mi_sensor.sensorStream()
 
 # Trget values
 incli_target = 28
-orient_target = 100
+orient_target = 200
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
@@ -31,7 +31,7 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V1.pkl')
 
 error = 0.03
 

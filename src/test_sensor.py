@@ -16,13 +16,13 @@ motors.startMotors()  # start motors
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(38, 270)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(25, 0)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
 motors.setupPositionsMode(12, 12)
 motors.setPositions([theta1, theta2, theta3])
 
-for i in np.arange(0, 5, 0.02):
+for i in np.arange(0, 15, 0.02):
     inclination, orientation = mi_sensor.readSensor(
         mi_sensor)  # new method of teh sensor class
 
