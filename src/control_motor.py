@@ -20,8 +20,8 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 20
-orient_target = 200
+incli_target = 21
+orient_target = 110
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)

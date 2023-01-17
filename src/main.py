@@ -31,7 +31,7 @@ motors.setupPositionsMode(15, 15)  # setting velocity and acceleration values
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
 motors.loadMotors([1, 2, 3])  # motor's ids
 motors.startMotors()  # start m
-for inclination in range(5, 36, 5):
+for inclination in range(5, 41, 5):
     # Orientation's repetition
     for orientation in range(5, 361, 10):
         # instantiate InverseKinematics class
@@ -55,7 +55,7 @@ for inclination in range(5, 36, 5):
     df = pd.DataFrame(data, columns=cols)
     # print(df)
     df.to_csv(
-        '/home/sofia/SOFIA_Python/data/Data_2023/data_january/data_orient10_MASTER.csv', index=False)
+        '/home/sofia/SOFIA_Python/data/Data_2023/data_january/data_orient10_MASTER_17.csv', index=False)
     df.info()
 
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
