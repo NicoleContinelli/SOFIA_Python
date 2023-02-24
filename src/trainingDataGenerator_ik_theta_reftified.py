@@ -99,7 +99,7 @@ def data_training(df_input, df_output):
 
 
 # Load the data and preprocessed it to extract the I and O rectified
-df1_10 = pd.read_csv('/home/sofia/SOFIA_Python/data/Data_2023/data_february/data_orient10_7.csv')
+df1_10 = pd.read_csv('/home/sofia/SOFIA_Python/data/Data_2023/data_february/data_orient10_MASTER_24.csv')
 data_target = inputs(df1_10)
 
 # Load the data and preprocessed it to extract the I and O rectified
@@ -110,6 +110,6 @@ data_labels = outputs(data_target)
 df_training = data_training(data_target, data_labels)
 
 df_training.to_csv(
-        '/home/sofia/SOFIA_Python/data/Data_2023/data_february/data_training_orient10_7.csv', index=False)
+        '/home/sofia/SOFIA_Python/data/Data_2023/data_february/data_training_orient10_MASTER_24.csv', index=False)
         
 print("Data Ready")
