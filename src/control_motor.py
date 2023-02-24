@@ -20,8 +20,8 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 21
-orient_target = 110
+incli_target = 35
+orient_target = 300
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
@@ -34,7 +34,7 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V1.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V3.pkl')
 
 # For plotting the graph
 incli_data = []
@@ -48,7 +48,7 @@ for time in np.arange(0,15,0.02):
     error_i = incli_target - ik_incli
     error_o = orient_target - ik_orient
 
-    # Just to compare the final values of theta (para saber si los valores de la prediccion estàn bien)
+    # Just to compare the final values of theta (para saber si los valores de la prediccion están bien)
     incli_rect = ik_incli + error_i
     orient_rect = ik_orient + error_o
 
@@ -56,18 +56,18 @@ for time in np.arange(0,15,0.02):
     theta_rect1, theta_rect2, theta_rect3 = kine2.neckInverseKinematics() 
 
     # Obtain the predictions from the model, that are the 3 values of theta 
-    pred = model_reg .predict([[incli_target, orient_target, error_i, error_o]])
+    pred = model_reg.predict([[incli_target, orient_target, error_i, error_o]])
     pred = pred.flatten().tolist()
 
     error_theta1 = pred[0] # Grab the values of theta for each motor
     error_theta2 = pred[1]
     error_theta3 = pred[2]
     
-    new_theta1 = theta1 + error_theta1 # Adjusting theta (IK theta + prediction error)
-    new_theta2 = theta2 + error_theta1
-    new_theta3 = theta3 + error_theta1
+    new_theta1 = theta_rect1 + error_theta1 # Adjusting theta (IK theta + prediction error)
+    new_theta2 = theta_rect2 + error_theta1
+    new_theta3 = theta_rect3 + error_theta1
 
-    print('Preductions:', new_theta1, new_theta2, new_theta3)
+    print('Predictions:', new_theta1, new_theta2, new_theta3)
     print('Inverse K.:', theta_rect1, theta_rect2, theta_rect3)
     
     # Setting new positions with the adjusted thetas
