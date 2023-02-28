@@ -1,6 +1,8 @@
 from model.sensor import Sensor
 from model.system_motors import SystemMotors
 from model.inverse_kinematics import InverseKinematics
+
+
 import math
 import numpy as np
 import pandas as pd
@@ -8,6 +10,7 @@ import joblib
 
 
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import Normalizer
 
 
 # Motors
@@ -20,8 +23,8 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 33
-orient_target = 200
+incli_target = 25
+orient_target = 190
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
@@ -34,14 +37,14 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V1.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V4.pkl')
 
 # For plotting the graph
 incli_data = []
 orient_data = []
 
 #while (time < 20):
-for time in np.arange(0,15,0.02):
+for time in np.arange(0,10,0.02):
     time =+ time
     print(time)
     # Calculate the Inclination and Orientation sensor error
@@ -56,7 +59,11 @@ for time in np.arange(0,15,0.02):
     theta_rect1, theta_rect2, theta_rect3 = kine2.neckInverseKinematics() 
 
     # Obtain the predictions from the model, that are the 3 values of theta 
-    pred = model_reg.predict([[incli_target, orient_target, error_i, error_o]])
+    scaler = Normalizer()
+
+    values_to_predict = np.array([[incli_target, orient_target, error_i, error_o]])
+    values_to_predict_trans = scaler.transform(values_to_predict)
+    pred = model_reg.predict(values_to_predict_trans)
     pred = pred.flatten().tolist()
 
     error_theta1 = pred[0] # Grab the values of theta for each motor
