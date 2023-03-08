@@ -12,7 +12,7 @@ import joblib
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import Normalizer
 
-xx = [i/1 for i in range(5760)]
+xx = [i/1 for i in range(28800)]
 def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, label2, label3):
     plt.figure(figsize=(15,15))
     
@@ -20,7 +20,7 @@ def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, 
     plt.grid()
     plt.plot(x, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(x, y1_2, color = color2, label = label2, linewidth = 1.5)
-    plt.ylabel("Inclinación (grados)")
+    plt.ylabel("Inclinación (grados) - 2880 data")
     plt.title(title)
     plt.legend()
     
@@ -31,7 +31,7 @@ def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, 
     plt.plot(x, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(x, y2_2, color = color2, label = label3, linewidth = 1.5)
     plt.legend()
-    plt.savefig(r'ik7.png')
+    plt.savefig('ik9.png')
     return plt.show()
 
 # Motors
@@ -51,7 +51,7 @@ orient_target = 0
 kine1 = InverseKinematics(incli_target, orient_target)
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
-motors.setupPositionsMode(15, 15)
+motors.setupPositionsMode(16, 16)
 motors.setPositions([theta1, theta2, theta3])
 
 # Kowing the sensor lecture after setting the IK position
@@ -76,7 +76,7 @@ for incli_target in range(5, 41, 5):
     # Orientation's repetition
     for orient_target in range(5, 361, 10):
         #while (time < 20):
-        for time in np.arange(0,2,0.1):
+        for time in np.arange(0,2,0.02):
             time =+ time
             print(time)
             # Calculate the Inclination and Orientation sensor error

@@ -12,6 +12,10 @@ import joblib
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import Normalizer
 
+from timeit import default_timer as timer
+
+
+
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
@@ -24,13 +28,13 @@ mi_sensor.sensorStream()
 
 # Trget values
 incli_target = 25
-orient_target = 190
+orient_target = 200
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
-motors.setupPositionsMode(12, 12)
+motors.setupPositionsMode(16, 16)
 motors.setPositions([theta1, theta2, theta3])
 
 # Kowing the sensor lecture after setting the IK position
@@ -43,10 +47,13 @@ model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MA
 incli_data = []
 orient_data = []
 
+
+start_time = timer()  # record the current time
+
 #while (time < 20):
-for time in np.arange(0,10,0.02):
-    time =+ time
-    print(time)
+for step in np.arange(0,10,0.05):
+    step =+ step
+    print(step)
     # Calculate the Inclination and Orientation sensor error
     error_i = incli_target - ik_incli
     error_o = orient_target - ik_orient
@@ -82,11 +89,18 @@ for time in np.arange(0,10,0.02):
 
     # Reading sensor again
     ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
+    end_time = timer() # record the time again
+    elapsed_time = end_time - start_time  # calculate the elapsed time
+    print(f"Elapsed time: {elapsed_time:.6f} seconds")  # print the elapsed time in seconds with 6 decimal places
+
+
     incli_data.append(ik_incli)
     orient_data.append(ik_orient)
 
     print("Inclination: ", round(ik_incli, 1),
             " Orientation: ", round(ik_orient, 1))
+
+
 
 y_axis_i = incli_data
 y_axis_o = orient_data
