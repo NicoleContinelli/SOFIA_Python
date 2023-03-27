@@ -41,7 +41,7 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V4.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V5.pkl')
 
 # For plotting the graph
 incli_data = []

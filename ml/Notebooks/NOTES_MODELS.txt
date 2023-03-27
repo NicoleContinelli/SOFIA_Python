@@ -1,0 +1,6 @@
+Modelos entrenados y sus versiones
+1. trained_error_motors_MASTER_V1.pkl (MLP entrenada con datos de un día) thetas rectificados
+2. trained_error_motors_MASTER_V2.pkl (MLP entrenada con datos de dos días) thetas rectificados
+3. trained_error_motors_MASTER_V3.pkl (MLP entrenada con datos de cuatro días) thetas rectificados
+4. trained_error_motors_MASTER_V4.pkl (MLP entrenada con datos de tres días) thetas rectificados y datos normalizados con Standard Scaler
+5. trained_error_motors_MASTER_V5.pkl (MLP entrenada con datos de tres días) thetas rectificados y datos normalizados con los datos en radianes
