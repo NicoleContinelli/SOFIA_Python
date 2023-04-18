@@ -27,8 +27,8 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 25
-orient_target = 200
+incli_target = 38
+orient_target = 357
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
@@ -51,7 +51,7 @@ orient_data = []
 start_time = timer()  # record the current time
 
 #while (time < 20):
-for step in np.arange(0,10,0.05):
+for step in np.arange(0,15,0.05):
     step =+ step
     print(step)
     # Calculate the Inclination and Orientation sensor error
@@ -106,16 +106,27 @@ y_axis_i = incli_data
 y_axis_o = orient_data
 
 fig, axs = plt.subplots(2)
-axs[0].plot(y_axis_i, color='purple')
+axs[0].plot(y_axis_i, color='purple', label='Sensor Inclination')
+axs[0].hlines(y=incli_target, xmin=0, xmax=len(y_axis_i), linewidth=1, color='black', linestyles='--', label='Target Inclination')
 axs[0].set_title('Inclination Control')
 
-axs[1].plot(y_axis_o, color='orange')
+
+axs[1].plot(y_axis_o, color='orange', label='Sensor Orientation')
+axs[1].hlines(y=orient_target, xmin=0, xmax=len(y_axis_o), linewidth=1, color='black', linestyles='--', label='Target Orientation')
 axs[1].set_title('Orientation Control')
 
-plt.xlabel('Time (s)')
-plt.ylabel('Degrees')
+
+axs[0].set_xlabel('Time (s)')
+axs[0].set_ylabel('Degrees')
+
+axs[1].set_xlabel('Time (s)')
+axs[1].set_ylabel('Degrees')
+
+axs[0].legend()
+axs[1].legend()
 plt.show()
 
+motors.setPositions([0,0,0])
 
 '''print("error Inclination: ", round(incli_target - ik_incli, 1),
             " error Orientation: ", round(orient_target - ik_orient, 1))'''

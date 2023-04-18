@@ -12,7 +12,7 @@ import joblib
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import Normalizer
 
-xx = [i/1 for i in range(28800)]
+xx = [i/1 for i in range(3200)]
 def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, label2, label3):
     plt.figure(figsize=(15,15))
     
@@ -58,7 +58,7 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V4.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V5.pkl')
 
 # For plotting the graph
 incli_data = []
@@ -72,9 +72,9 @@ list_orient_target = []
 
 
 # Inclination's repetition
-for incli_target in range(5, 41, 5):
+for incli_target in range(5, 41, 10):
     # Orientation's repetition
-    for orient_target in range(5, 361, 10):
+    for orient_target in range(5, 361, 45):
         #while (time < 20):
         for time in np.arange(0,2,0.02):
             time =+ time
