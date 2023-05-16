@@ -20,7 +20,7 @@ def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, 
     plt.grid()
     plt.plot(x, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(x, y1_2, color = color2, label = label2, linewidth = 1.5)
-    plt.ylabel("Inclinación (grados) - 2880 data")
+    plt.ylabel("Inclinación (grados)")
     plt.title(title)
     plt.legend()
     

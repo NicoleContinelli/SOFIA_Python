@@ -28,7 +28,7 @@ data = []
 motors.setupPositionsMode(12, 12)  # setting velocity and acceleration values
 
 # ML
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/trained_model2_v3.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/trained_model2_v2tanh.pkl')
 
 
 # Inclination's repetition
@@ -56,7 +56,7 @@ for inclination in range(5, 36, 5):
     df = pd.DataFrame(data, columns=cols)
     # print(df)
     df.to_csv(
-        '/home/sofia/SOFIA_Python/ml/RIAI_Models/data_model12_reg_Tanh_v3.csv', index=False)
+        '/home/sofia/SOFIA_Python/ml/TFM/data_model12_v2tanh_Predictions.csv', index=False)
     df.info()
 
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
