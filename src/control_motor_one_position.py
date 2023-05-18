@@ -10,11 +10,32 @@ import joblib
 
 
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import Normalizer, StandardScaler
 
 from timeit import default_timer as timer
 
 
+xx = [i/1 for i in range(350)]
+def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, label2, label3):
+    plt.figure(figsize=(15,15))
+    
+    plt.subplot(2, 1, 1)
+    plt.grid()
+    plt.plot(x, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
+    plt.plot(x, y1_2, color = color2, label = label2, linewidth = 1.5)
+    plt.ylabel("Inclinación (grados)")
+    plt.title(title)
+    plt.legend()
+    
+    plt.subplot(2, 1, 2)
+    plt.grid()
+    plt.xlabel("Tiempo (m)")
+    plt.ylabel("Orientación (grados)")
+    plt.plot(x, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
+    plt.plot(x, y2_2, color = color2, label = label3, linewidth = 1.5)
+    plt.legend()
+    plt.savefig('ik9.png')
+    return plt.show()
 
 
 # Motors
@@ -27,8 +48,8 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 38
-orient_target = 357
+incli_target = 34
+orient_target = 334
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
@@ -41,17 +62,24 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V5.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V7.pkl')
 
 # For plotting the graph
 incli_data = []
 orient_data = []
 
+# For plotting the graph - target values
+list_incli_target = []
+list_orient_target = []
 
 start_time = timer()  # record the current time
 
+# For normalizing the data
+mean_motors = -0.045458604279763254
+std_motors = 0.2670333006545897
+
 #while (time < 20):
-for step in np.arange(0,15,0.05):
+for step in np.arange(0,17.5,0.05):
     step =+ step
     print(step)
     # Calculate the Inclination and Orientation sensor error
@@ -68,9 +96,12 @@ for step in np.arange(0,15,0.05):
     # Obtain the predictions from the model, that are the 3 values of theta 
     scaler = Normalizer()
 
-    values_to_predict = np.array([[incli_target, orient_target, error_i, error_o]])
-    values_to_predict_trans = scaler.transform(values_to_predict)
-    pred = model_reg.predict(values_to_predict_trans)
+    values_to_predict = np.array([incli_target, orient_target, error_i, error_o]).reshape(-1,1)
+    values_to_predict_trans = StandardScaler().fit_transform(values_to_predict)
+    values_to_predict_trans_ad = (values_to_predict_trans * std_motors + mean_motors).reshape(1,-1)
+    #values_to_predict = values_to_predict.flatten()
+    #values_to_predict_trans = [[math.radians(i) for i in values_to_predict]]
+    pred = model_reg.predict(values_to_predict_trans_ad)
     pred = pred.flatten().tolist()
 
     error_theta1 = pred[0] # Grab the values of theta for each motor
@@ -90,19 +121,29 @@ for step in np.arange(0,15,0.05):
     # Reading sensor again
     ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
     end_time = timer() # record the time again
-    elapsed_time = end_time - start_time  # calculate the elapsed time
+    elapsed_time = end_time - start_time # calculate the elapsed time
     print(f"Elapsed time: {elapsed_time:.6f} seconds")  # print the elapsed time in seconds with 6 decimal places
 
 
     incli_data.append(ik_incli)
     orient_data.append(ik_orient)
 
+    list_incli_target.append(incli_target)
+    list_orient_target.append(orient_target)
+
     print("Inclination: ", round(ik_incli, 1),
             " Orientation: ", round(ik_orient, 1))
 
 
 
-y_axis_i = incli_data
+plot_two_function("Cinematica Inversa", xx,
+                 list_incli_target,incli_data,list_orient_target,orient_data,
+                 "black", "orange", 
+                 "Referencia","Inclinación - CI","Orientación - CI")
+
+motors.setPositions([0,0,0])
+
+'''y_axis_i = incli_data
 y_axis_o = orient_data
 
 fig, axs = plt.subplots(2)
@@ -128,7 +169,7 @@ plt.show()
 
 motors.setPositions([0,0,0])
 
-'''print("error Inclination: ", round(incli_target - ik_incli, 1),
+print("error Inclination: ", round(incli_target - ik_incli, 1),
             " error Orientation: ", round(orient_target - ik_orient, 1))'''
 
 
