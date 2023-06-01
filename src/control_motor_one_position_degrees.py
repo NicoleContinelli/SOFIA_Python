@@ -34,7 +34,7 @@ def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, 
     plt.plot(x, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(x, y2_2, color = color2, label = label3, linewidth = 1.5)
     plt.legend()
-    plt.savefig('MLP_v7_norm_IV.png')
+    plt.savefig('MLP_v3_degrees.png')
     return plt.show()
 
 
@@ -48,8 +48,8 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 6
-orient_target = 340
+incli_target = 25
+orient_target = 250
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
@@ -62,7 +62,7 @@ motors.setPositions([theta1, theta2, theta3])
 #ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V7.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V3.pkl')
 
 # For plotting the graph
 incli_data = []
@@ -94,8 +94,8 @@ for step in np.arange(0,17.5,0.05):
     #orient_rect = ik_orient + error_o
     incli_rect = incli_target + error_i
     orient_rect = orient_target #+ error_o
-    if error_o<= 90:
-        orient_rect = orient_target + error_o
+    '''if error_o>= 90:
+        orient_rect = orient_target'''
 
     kine2 = InverseKinematics(incli_rect, orient_rect)
     theta_rect1, theta_rect2, theta_rect3 = kine2.neckInverseKinematics() 
@@ -103,28 +103,23 @@ for step in np.arange(0,17.5,0.05):
     # Obtain the predictions from the model, that are the 3 values of theta 
     scaler = Normalizer()
 
-    values_to_predict = np.array([incli_target, orient_target, error_i, error_o]).reshape(-1,1)
-    #values_to_predict_trans = [[math.radians(i) for i in values_to_predict]]
-    values_to_predict_trans = StandardScaler().fit_transform(values_to_predict)
-    values_to_predict_trans_ad = (values_to_predict_trans * std_motors + mean_motors).reshape(1,-1)
+    values_to_predict = np.array([[incli_target, orient_target, error_i, error_o]])
     #values_to_predict = values_to_predict.flatten()
-    pred = model_reg.predict(values_to_predict_trans_ad)
+    #values_to_predict_trans = [[math.radians(i) for i in values_to_predict]]
+    pred = model_reg.predict(values_to_predict)
     pred = pred.flatten().tolist()
 
     error_theta1 = pred[0] # Grab the values of theta for each motor
     error_theta2 = pred[1]
     error_theta3 = pred[2]
     
-    new_theta1 = theta_rect1 + error_theta1 # Adjusting theta (IK theta_rect + prediction error)
+    new_theta1 = theta_rect1 + error_theta1 # Adjusting theta (IK theta + prediction error)
     new_theta2 = theta_rect2 + error_theta2
     new_theta3 = theta_rect3 + error_theta3
 
-        #print sensor
-    print("Inclination: ", round(ik_incli, 1),
-            " Orientation: ", round(ik_orient, 1))
-
-    print('Rect. incli: ' , round(incli_rect,1), '  Rect. orient:', round(orient_rect,1))
-        
+    print('Rect. angles:', incli_rect, orient_rect)
+    print('Inverse K.:', theta_rect1, theta_rect2, theta_rect3)
+    
     # Setting new positions with the adjusted thetas
     motors.setPositions([new_theta1, new_theta2, new_theta3])
 
@@ -132,7 +127,7 @@ for step in np.arange(0,17.5,0.05):
     #ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
     end_time = timer() # record the time again
     elapsed_time = end_time - start_time # calculate the elapsed time
-    print(f"Tiempo: {elapsed_time:.2f} secondos")  # print the elapsed time in seconds with 6 decimal places
+    print(f"Elapsed time: {elapsed_time:.6f} seconds")  # print the elapsed time in seconds with 6 decimal places
 
 
     incli_data.append(ik_incli)
@@ -141,6 +136,9 @@ for step in np.arange(0,17.5,0.05):
     list_incli_target.append(incli_target)
     list_orient_target.append(orient_target)
 
+    #print sensor
+    print("Inclination: ", round(ik_incli, 1),
+            " Orientation: ", round(ik_orient, 1))
 
 
 

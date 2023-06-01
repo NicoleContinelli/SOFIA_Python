@@ -10,7 +10,7 @@ import joblib
 
 
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import Normalizer, StandardScaler
 
 xx = [i/1 for i in range(3200)]
 def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, label2, label3):
@@ -58,7 +58,7 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V5.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V7.pkl')
 
 # For plotting the graph
 incli_data = []
@@ -69,7 +69,9 @@ orient_data = []
 list_incli_target = []
 list_orient_target = []
 
-
+# For normalizing the data
+mean_motors = -0.045458604279763254
+std_motors = 0.2670333006545897
 
 # Inclination's repetition
 for incli_target in range(5, 41, 10):
@@ -93,18 +95,24 @@ for incli_target in range(5, 41, 10):
             # Obtain the predictions from the model, that are the 3 values of theta 
             scaler = Normalizer()
 
-            values_to_predict = np.array([[incli_target, orient_target, error_i, error_o]])
+            values_to_predict = np.array([incli_target, orient_target, error_i, error_o]).reshape(-1,1)
+            values_to_predict_trans = StandardScaler().fit_transform(values_to_predict)
+            values_to_predict_trans_ad = (values_to_predict_trans * std_motors + mean_motors).reshape(1,-1)
+            pred = model_reg.predict(values_to_predict_trans_ad)
+            pred = pred.flatten().tolist()
+
+            '''values_to_predict = np.array([[incli_target, orient_target, error_i, error_o]])
             values_to_predict_trans = scaler.transform(values_to_predict)
             pred = model_reg.predict(values_to_predict_trans)
-            pred = pred.flatten().tolist()
+            pred = pred.flatten().tolist()'''
 
             error_theta1 = pred[0] # Grab the values of theta for each motor
             error_theta2 = pred[1]
             error_theta3 = pred[2]
             
             new_theta1 = theta_rect1 + error_theta1 # Adjusting theta (IK theta + prediction error)
-            new_theta2 = theta_rect2 + error_theta1
-            new_theta3 = theta_rect3 + error_theta1
+            new_theta2 = theta_rect2 + error_theta2
+            new_theta3 = theta_rect3 + error_theta3
 
             print('Predictions:', new_theta1, new_theta2, new_theta3)
             print('Inverse K.:', theta_rect1, theta_rect2, theta_rect3)
