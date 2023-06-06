@@ -15,26 +15,26 @@ from sklearn.preprocessing import Normalizer, StandardScaler
 from timeit import default_timer as timer
 
 
-xx = [i/1 for i in range(350)]
-def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, label2, label3):
+#xx = [i/1 for i in range(175)]
+def plot_two_function(title, y1_1, y1_2, y2_1, y2_2, t, color1, color2, label1, label2, label3):
     plt.figure(figsize=(15,15))
     
     plt.subplot(2, 1, 1)
     plt.grid()
-    plt.plot(x, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
-    plt.plot(x, y1_2, color = color2, label = label2, linewidth = 1.5)
+    plt.plot(t, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
+    plt.plot(t, y1_2, color = color2, label = label2, linewidth = 1.5)
     plt.ylabel("Inclinación (grados)")
     plt.title(title)
     plt.legend()
     
     plt.subplot(2, 1, 2)
     plt.grid()
-    plt.xlabel("Tiempo (m)")
+    plt.xlabel("Tiempo (segundos)")
     plt.ylabel("Orientación (grados)")
-    plt.plot(x, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
-    plt.plot(x, y2_2, color = color2, label = label3, linewidth = 1.5)
+    plt.plot(t, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
+    plt.plot(t, y2_2, color = color2, label = label3, linewidth = 1.5)
     plt.legend()
-    plt.savefig('MLP_v7_norm_IV.png')
+    plt.savefig('MLP_v7_II_prueba.png')
     return plt.show()
 
 
@@ -48,14 +48,14 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 6
-orient_target = 340
+incli_target = 42
+orient_target = 15
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
-motors.setupPositionsMode(15,15)
+motors.setupPositionsMode(12,12)
 motors.setPositions([theta1, theta2, theta3])
 
 # Kowing the sensor lecture after setting the IK position
@@ -67,6 +67,7 @@ model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MA
 # For plotting the graph
 incli_data = []
 orient_data = []
+time_data = []
 
 # For plotting the graph - target values
 list_incli_target = []
@@ -80,9 +81,9 @@ std_motors = 0.2670333006545897
 
 
 #while (time < 20):
-for step in np.arange(0,17.5,0.05):
+for step in np.arange(0,12,0.05):
     step =+ step
-    print(step)
+    #print(step)
     ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
     # Calculate the Inclination and Orientation sensor error
@@ -130,7 +131,7 @@ for step in np.arange(0,17.5,0.05):
 
     # Reading sensor again
     #ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
-    end_time = timer() # record the time again
+    end_time = timer() # record t+ error_ohe time again
     elapsed_time = end_time - start_time # calculate the elapsed time
     print(f"Tiempo: {elapsed_time:.2f} secondos")  # print the elapsed time in seconds with 6 decimal places
 
@@ -141,12 +142,14 @@ for step in np.arange(0,17.5,0.05):
     list_incli_target.append(incli_target)
     list_orient_target.append(orient_target)
 
+    time_data.append(elapsed_time)
 
 
 
-plot_two_function("Cinemática Inversa", xx,
-                 list_incli_target,incli_data,list_orient_target,orient_data,
-                 "black", "#FF0000", 
+
+plot_two_function("Control de lazo cerrado de la Cinemática Inversa - MLP datos ajustados a la recta",
+                 list_incli_target,incli_data,list_orient_target,orient_data, time_data,
+                 "black", "#FFC30F", 
                  "Referencia","Inclinación - CI","Orientación - CI")
 
 motors.setPositions([0,0,0])

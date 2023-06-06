@@ -25,12 +25,12 @@ def plot_two_function(title, t, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, 
     
     plt.subplot(2, 1, 2)
     plt.grid()
-    plt.xlabel("Tiempo (s)")
+    plt.xlabel("Tiempo (segundos)")
     plt.ylabel("Orientación (grados)")
     plt.plot(t, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(t, y2_2, color = color2, label = label3, linewidth = 1.5)
     plt.legend()
-    plt.savefig('prueba.png')
+    plt.savefig('MLP_V3_Trajectory_degrees.png')
     return plt.show()
 
 
@@ -59,7 +59,7 @@ motors.setPositions([theta1, theta2, theta3])
 ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
 
 # Model trained
-model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V7.pkl')
+model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MASTER_V3.pkl')
 
 # For plotting the graph
 incli_data = []
@@ -83,7 +83,7 @@ range_incli = range(40, 4, -10)
 for incli_target in range_incli:
     # Orientation's repetition
     for orient_target in range(5, 361, 90):
-        #while (time < 20):
+        #while (time < 20):Control de lazo cerrado de la Cinemática Inversa  - MLP datos en escala de radianes
         for step in np.arange(0,10,0.05):
             step =+ step
             #print(step)
@@ -107,13 +107,10 @@ for incli_target in range_incli:
             # Obtain the predictions from the model, that are the 3 values of theta 
             scaler = Normalizer()
 
-            values_to_predict = np.array([incli_target, orient_target, error_i, error_o]).reshape(-1,1)
-            #values_to_predict_trans = [[math.radians(i) for i in values_to_predict]]
-            values_to_predict_trans = StandardScaler().fit_transform(values_to_predict)
-            values_to_predict_trans_ad = (values_to_predict_trans * std_motors + mean_motors).reshape(1,-1)
-            #values_to_predict = values_to_predict.flatten()
-            pred = model_reg.predict(values_to_predict_trans_ad)
+            values_to_predict = np.array([[incli_target, orient_target, error_i, error_o]])
+            pred = model_reg.predict(values_to_predict)
             pred = pred.flatten().tolist()
+
 
             error_theta1 = pred[0] # Grab the values of theta for each motor
             error_theta2 = pred[1]
@@ -150,9 +147,9 @@ for incli_target in range_incli:
 
 
 
-plot_two_function("Control de trayectoria en lazo cerrado de la Cinemática Inversa - MLP datos ajustados a la recta",time_data,
+plot_two_function("Control de trayectoria en lazo cerrado de la Cinemática Inversa - MLP sin transformación datos",time_data,
                  list_incli_target,incli_data,list_orient_target,orient_data,
-                 "black", "#FFC30F", 
+                 "black", "#C70039", 
                  "Referencia","Inclinación - CI","Orientación - CI")
 
 motors.setPositions([0,0,0])

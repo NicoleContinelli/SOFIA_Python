@@ -15,26 +15,26 @@ from sklearn.preprocessing import Normalizer, StandardScaler
 from timeit import default_timer as timer
 
 
-xx = [i/1 for i in range(350)]
-def plot_two_function(title, x, y1_1, y1_2, y2_1, y2_2, color1, color2, label1, label2, label3):
+#xx = [i/1 for i in range(2880)]
+def plot_two_function(title, y1_1, y1_2, y2_1, y2_2, t, color1, color2, label1, label2, label3):
     plt.figure(figsize=(15,15))
     
     plt.subplot(2, 1, 1)
     plt.grid()
-    plt.plot(x, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
-    plt.plot(x, y1_2, color = color2, label = label2, linewidth = 1.5)
+    plt.plot(t, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
+    plt.plot(t, y1_2, color = color2, label = label2, linewidth = 1.5)
     plt.ylabel("Inclinación (grados)")
     plt.title(title)
     plt.legend()
     
     plt.subplot(2, 1, 2)
     plt.grid()
-    plt.xlabel("Tiempo (m)")
+    plt.xlabel("Tiempo (segundos)")
     plt.ylabel("Orientación (grados)")
-    plt.plot(x, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
-    plt.plot(x, y2_2, color = color2, label = label3, linewidth = 1.5)
+    plt.plot(t, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
+    plt.plot(t, y2_2, color = color2, label = label3, linewidth = 1.5)
     plt.legend()
-    plt.savefig('MLP_v5_rad.png')
+    plt.savefig('MLP_v5_radianes.png')
     return plt.show()
 
 
@@ -67,6 +67,7 @@ model_reg = joblib.load('/home/sofia/SOFIA_Python/ml/TFM/trained_error_motors_MA
 # For plotting the graph
 incli_data = []
 orient_data = []
+time_data = []
 
 # For plotting the graph - target values
 list_incli_target = []
@@ -74,13 +75,13 @@ list_orient_target = []
 
 start_time = timer()  # record the current time
 
-# For normalizing the data
+# For normalizing the datatime_data.append(elapsed_time)
 mean_motors = -0.045458604279763254
 std_motors = 0.2670333006545897
 
 
 #while (time < 20):
-for step in np.arange(0,17.5,0.05):
+for step in np.arange(0,12,0.05):
     step =+ step
     print(step)
     ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
@@ -93,9 +94,9 @@ for step in np.arange(0,17.5,0.05):
     #incli_rect = ik_incli + error_i 
     #orient_rect = ik_orient + error_o
     incli_rect = incli_target + error_i
-    orient_rect = orient_target + error_o
-    '''if error_o>= 90:
-        orient_rect = orient_target'''
+    orient_rect = orient_target 
+    #if error_o<= 90:
+        #orient_rect = orient_target + error_o
 
     kine2 = InverseKinematics(incli_rect, orient_rect)
     theta_rect1, theta_rect2, theta_rect3 = kine2.neckInverseKinematics() 
@@ -117,8 +118,11 @@ for step in np.arange(0,17.5,0.05):
     new_theta2 = theta_rect2 + error_theta2
     new_theta3 = theta_rect3 + error_theta3
 
-    print('Rect. angles:', incli_rect, orient_rect)
-    print('Inverse K.:', theta_rect1, theta_rect2, theta_rect3)
+            #print sensor
+    print("Inclination: ", round(ik_incli, 1),
+            " Orientation: ", round(ik_orient, 1))
+
+    print('Rect. incli: ' , round(incli_rect,1), '  Rect. orient:', round(orient_rect,1))
     
     # Setting new positions with the adjusted thetas
     motors.setPositions([new_theta1, new_theta2, new_theta3])
@@ -137,14 +141,16 @@ for step in np.arange(0,17.5,0.05):
     list_orient_target.append(orient_target)
 
     #print sensor
-    print("Inclination: ", round(ik_incli, 1),
-            " Orientation: ", round(ik_orient, 1))
+    #print("Inclination: ", round(ik_incli, 1),
+    #        " Orientation: ", round(ik_orient, 1))
+    
+    time_data.append(elapsed_time)
 
 
 
-plot_two_function("Cinemática Inversa", xx,
-                 list_incli_target,incli_data,list_orient_target,orient_data,
-                 "black", "#FF0000", 
+plot_two_function("Control de lazo cerrado de la Cinemática Inversa  - MLP datos en escala de radianes",
+                 list_incli_target,incli_data,list_orient_target,orient_data,time_data,
+                 "black", "#FF5733", 
                  "Referencia","Inclinación - CI","Orientación - CI")
 
 motors.setPositions([0,0,0])
