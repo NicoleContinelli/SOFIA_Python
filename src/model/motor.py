@@ -20,13 +20,7 @@ class Motor:
         # create an instance of Cia402d
         self.motor = Cia402d.CiA402Device(idMotor, self.pm, self.sd)
 
-    # These methods are actions that a SINGLE motor can execute
-    def startMotor(self):
-        self.motor.Reset()
-        # Internally we are calling a function of "Cia402d" library, by the motor instance in the constructor
-        self.motor.SwitchOn()
-
-    def stopMotor(self):
+    # These methods are actions that a SINGLE motor can executesrc
         self.motor.SwitchOff()
 
     def setupPositionMode(self, vel, accel):
@@ -48,5 +42,16 @@ class Motor:
         print(data)
         return np.mean(data)
 
+    def Setup_Velocity_Mode(self, vel):
+        return self.motor.Setup_Velocity_Mode(vel)
+
     def getVelocity(self):
         return self.motor.GetVelocity()
+
+    def Setup_Torque_Mode(self):
+        return self.motor.Setup_Torque_Mode()
+    
+    def SetTorque(self, torq):
+        return self.motor.SetTorque(torq)
+    
+
