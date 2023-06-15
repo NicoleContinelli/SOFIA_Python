@@ -48,7 +48,7 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 42
+incli_target = 10
 orient_target = 15
 
 # Instantiate InverseKinematics class
@@ -95,8 +95,8 @@ for step in np.arange(0,12,0.05):
     #orient_rect = ik_orient + error_o
     incli_rect = incli_target + error_i
     orient_rect = orient_target #+ error_o
-    if error_o<= 90:
-        orient_rect = orient_target + error_o
+    #if error_o<= 90:
+    #    orient_rect = orient_target + error_o
 
     kine2 = InverseKinematics(incli_rect, orient_rect)
     theta_rect1, theta_rect2, theta_rect3 = kine2.neckInverseKinematics() 

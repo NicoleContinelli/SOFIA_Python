@@ -78,7 +78,6 @@ mean_motors = -0.045458604279763254
 std_motors = 0.2670333006545897
 
 range_incli = range(40, 4, -10)
-
 # Inclination's repetition
 for incli_target in range_incli:
     # Orientation's repetition
