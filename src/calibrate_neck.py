@@ -15,7 +15,7 @@ diff = [1, 1, 1]  # difference
 baseCurrent = 40
 
 for i in range(10000):
-    vels = [val for val in motors.getVelocities()]
+    vels = [val for val in motors.getVelocity()]
     if vels < [1, 1, 1] and vels > [-1, -1, -1]:
         amps = motors.getAmps()
         diff = [(baseCurrent - amp)/10000 for amp in amps]

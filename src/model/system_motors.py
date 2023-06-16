@@ -55,7 +55,7 @@ class SystemMotors:
 
     def getVelocity(self):
         for motor in self.motorsArray:
-            yield motor.GetVelocity()
+            yield motor.getVelocity()
 
     def Setup_Torque_Mode(self):
         for motor in self.motorsArray:
