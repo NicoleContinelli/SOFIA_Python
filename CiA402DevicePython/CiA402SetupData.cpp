@@ -12,6 +12,8 @@ CiA402SetupData::CiA402SetupData(int new_encRes,float new_mlRatio, float new_Sam
     encRes = new_encRes;// Nº pulses for incremental encoder quadrature  (lines X 4)
     SampSL = new_SampSL;// speed/position loop sampling period of the motor Control (sampling_slow_loop)
     current_limit = 32767-(65520*motor_current_limit)/(2*drive_current_limit);// current_limit. CAnOpen programming iPOS 5.5.7. Object 207Fh: Current limit
+    motorCurrentLimit = motor_current_limit;
+    driverCurrentLimit = drive_current_limit;
 
 
     float count_sec = encRes/60.0;
@@ -48,5 +50,15 @@ float CiA402SetupData::getScaling_Factors_Acceleration() const
 int CiA402SetupData::getEncRes() const
 {
     return encRes;
+}
+
+double CiA402SetupData::GetMotorCurrentLimit() const
+{
+    return motorCurrentLimit;
+}
+
+double CiA402SetupData::GetDriverCurrentLimit() const
+{
+    return driverCurrentLimit;
 }
 

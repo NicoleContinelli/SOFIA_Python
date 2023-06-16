@@ -78,6 +78,7 @@ public:
      */
     double GetPosition();
     double GetVelocity();
+    double GetVelocityTP(); // Through Position
     double GetFilteredVelocity(int samples);
     double GetMeanVelocity();
     double GetAmps();
@@ -91,6 +92,8 @@ public:
     long Setup_Velocity_Mode(const uint32_t acceleration=1, const uint32_t target=0);
     long Setup_Torque_Mode();
     long SetTorque(double target);
+    long DisableTorque();
+    long EnableTorque();
     long SetAmpRaw(double target);
     long ForceSwitchOff();
 
@@ -132,21 +135,29 @@ private:
     float reduction_ratio_motor;    // Transmission ratio between the motor displacement in SI units and load displacement
     int encoder_resolution;         // Nº lines for incremental encoder quadrature  (lines X 4)
     float SampSL;                   // speed/position loop sampling period of the motor Control (sampling_slow_loop)
-    int current_limit;              // current_limit. CAnOpen programming iPOS 5.5.7. Object 207Fh: Current limit
+    double motorCurrentLimit;       // Motor current_limit. CAnOpen programming iPOS 5.6.7. Object 207Fh: Current limit
+    double driverCurrentLimit;      // Driver current_limit. CAnOpen programming iPOS 16.2.1. Ipeak Driver Current limit
 
-   //Technosoft drives work with parameters and variables represented in the drive internal units (IU).
-   // Constant to convert velocity from rad to count/sample
-   // The internal speed units are internal position units/(slow loop sampling period)
+    // Technosoft drives work with parameters and variables represented in the drive internal units (IU).
+    // Constant to convert velocity from rad to count/sample
+    // The internal speed units are internal position units/(slow loop sampling period)
     float Scaling_Factors_Velocity;
     float Scaling_Factors_Position;
     float Scaling_Factors_Acceleration;
 
+    //Current/Torque variables
+    double targetCurrent;
+    int32_t targetCurrentIU;
+
     //GetMeanVelocity variables
-    double currentPosition, lastPosition;
+    double currentPosition, lastPosition, currentPoss, previousPoss;
     double meanVelocity;
     std::chrono::system_clock::time_point actualTimeValue, lastTimeValue; //last time value
     std::chrono::system_clock::time_point encoderChangeTime;
     double encoderSpan;
+
+    //GetVelocityTP variables
+    std::chrono::system_clock::time_point currentTime, previousTime;
 
     std::chrono::nanoseconds dtsWait, tWaited;
 

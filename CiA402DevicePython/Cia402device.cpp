@@ -12,6 +12,9 @@ long CiA402Device::Init(CiA402SetupData *deviceData)
     Scaling_Factors_Velocity = deviceData->getScaling_Factors_Velocity();
     Scaling_Factors_Acceleration= deviceData->getScaling_Factors_Acceleration();
 
+    motorCurrentLimit = deviceData->GetMotorCurrentLimit();
+    driverCurrentLimit = deviceData->GetDriverCurrentLimit();
+
     //Initialize velocity and position
     encoder_resolution = deviceData->getEncRes();
     meanVelocity = 0;
@@ -20,6 +23,12 @@ long CiA402Device::Init(CiA402SetupData *deviceData)
     encoderSpan = 0;
 
     tWaited = chrono::milliseconds(1);
+
+    //initialize variables for GetVelocityTP
+    currentPoss = 0;
+    previousPoss = 0;
+    previousTime = std::chrono::system_clock::now();
+
     ///set adress for filtered amps (not working)
 //    const vector<uint8_t> cutoff = {0xFF,0xFF};
 //    WriteSDO(od::filtered_amps_set_cutoff,cutoff);
@@ -151,6 +160,7 @@ long CiA402Device::SwitchOn()
 
 
     EnablePDOs();
+    FlushBuffer();
 
     long response;
 
@@ -158,7 +168,7 @@ long CiA402Device::SwitchOn()
      WritePDO1(od::goreadytoswitchon);
 
      //it is the same for all pdos??
-     response = ReadPDO(0);
+     response = ReadPDO(1);
      FlushBuffer();
 //     response = ReadPDO(1);
      cout<<"READYTOSWITCHON RESPONSE: " << response <<endl;
@@ -170,7 +180,7 @@ long CiA402Device::SwitchOn()
      //FlushBuffer(2); //remove two messages, pdo1tx and pdo2tx
      //listen pdo1tx and pdo2tx
      //it is the same for all pdos??
-     response = ReadPDO(0);
+     response = ReadPDO(1);
      FlushBuffer();
 
 
@@ -457,6 +467,21 @@ double CiA402Device::GetVelocity()
     //cout<<"Get_Velocity"<<ret<<"rpm"<<endl;++++++++++++++++++++++++++++
 }
 
+
+double CiA402Device::GetVelocityTP() // Through Position
+{
+    currentTime = std::chrono::system_clock::now();
+    std::chrono::duration<float,std::milli> duration = currentTime - previousTime;
+    previousTime = currentTime;
+    //printf("CurrentPoss: %f PreviousPoss: %f Duration: %f ", this->GetPosition(), previousPoss, duration.count()* 0.001);    
+    currentPoss = this->GetPosition();
+    double result = ( (currentPoss - previousPoss) / (duration.count()* 0.001) );
+    previousPoss = currentPoss;
+    return result;
+
+
+}
+
 double CiA402Device::GetMeanVelocity()
 {
 
@@ -516,14 +541,19 @@ double CiA402Device::GetFilteredVelocity(int samples)
 
     return 0;
 }
+
 double CiA402Device::GetAmps()
 {
+    double currentIU= (double)ReadSDO(od::getamps);
 
-    int16_t amps= (int16_t)ReadSDO(od::getamps);
+    //targetCurrentIU = targetCurrent*ANALOGUE_INPUT_SCALE/(2.0*driverCurrentLimit); //operation from 16.2.1 ipos manual.
+    //targetCurrentIU = targetCurrentIU*HIGHPART_BITSHIFT_16; //shift to get MSB of the 32 bit value.
 
-    double scaledamps = (double)amps;
-    return scaledamps;
+    double targetCurrent = (currentIU * 2.0 * driverCurrentLimit) / ANALOGUE_INPUT_SCALE * HIGHPART_BITSHIFT_16;
+
+    return targetCurrent;
 }
+
 double CiA402Device::GetFilterdAmps()
 {
     ///does not work yet
@@ -760,41 +790,84 @@ long CiA402Device::Setup_Torque_Mode()
     WriteSDO(od::external_reference_type,od::torque_online_enable); /*received online via the CAN bus communication channel from the CANopen
                                                      master in object External On-line Reference (index 201C h )*/
 
-    current_limit =  ReadSDO(od::current_limit);
+    //motorCurrentLimit =  ReadSDO(od::current_limit); // esto estaba machacando la variable
 
 
-     cout << "Current limit" <<  (current_limit) << endl;
+     cout << "Current limit " <<  motorCurrentLimit << endl;
 
 
     return 0;
 }
 
+long CiA402Device::DisableTorque(){
+    //EnablePDOs();
+    long response;
+    response = WritePDO1(od::goswitchon);
+    //response = ReadPDO(0);
+    FlushBuffer();
+    cout<<"Disabling torque"<<endl;
+    //DisablePDOs();
+    return 0;
+}
+
+long CiA402Device::EnableTorque(){
+     long response;
+     FlushBuffer();
+     response = WritePDO1(od::goswitchon);
+     response = WritePDO1(od::goenable);
+     cout<<"Node " << (uint)id <<" enabled"<<endl;
+     //sleep(1);
+     FlushBuffer();
+    return 0;
+}
+
 long CiA402Device::SetTorque(double target){
 
+    cout << " target: " << target ;
+    double limitValue = 0.08;
 
-    // Basado en el punto 16.2.1. Object 6071h: Target torque. La corriente en unidades internas es el
+    // Basado en el punto 16.2.1. : Target torque. La corriente en unidades internas es el
     // tanto por uno de la corriente de pico del "drive". Multiplicado por el rango de de entrada analogica,
     // dado que el torque lo seteamos de manera online.
     // formula: current [ IU ] =  65520 ⋅ current [ A ] /   2 ⋅ Ipeak
     // that in the targetr variable computation corresponds to:
     // 65520 = 0xFFF0 = ANALOGUE_INPUT_SCALE
     // current [ A ] / Ipeak = target = (peak current ratio received as input)
-    //
 
-    int32_t targetr= int32_t (target*ANALOGUE_INPUT_SCALE/2.0)*HIGHPART_BITSHIFT_16;
+
+//    if(target > - limitValue && target < limitValue)
+//        target = - limitValue;
+
+//    if (target < limitValue && target >= 0)
+//        target = limitValue;
+
+    if(target >= - limitValue && target < 0)
+        target = - limitValue;
+
+    if (target <= limitValue && target >= 0)
+        target = limitValue;
+
     if(target > 1)
-        targetr = int32_t(ANALOGUE_INPUT_SCALE/2.0)*HIGHPART_BITSHIFT_16;
+    {
+        targetCurrent = motorCurrentLimit;
+    }
     else if(target < -1)
-        targetr = int32_t(-ANALOGUE_INPUT_SCALE/2.0)*HIGHPART_BITSHIFT_16;
+    {
+        targetCurrent = -motorCurrentLimit;
+    }
+    else
+    {
+        targetCurrent = target*motorCurrentLimit;
+    }
 
-//    cout<<endl<<"Esto se envia a la funcion:"<<(long)target<<endl;
-//    cout<<endl<<"Esto se envia de amperaje:"<<(int32_t)targetr<<endl;
+    cout << " motor current limited: " << targetCurrent << endl;
 
+    targetCurrentIU = targetCurrent*ANALOGUE_INPUT_SCALE/(2.0*driverCurrentLimit); //operation from 16.2.1 ipos manual.
+    targetCurrentIU = targetCurrentIU*HIGHPART_BITSHIFT_16; //shift to get MSB of the 32 bit value.
 
-    WriteSDO(od::external_reference, data32to4x8(targetr));
+    //cout<<endl<<"Esto se envia de amperaje: "<<targetCurrentIU<<endl;
 
-    //cout << " targetr: " << targetr << ", input target: " << target << ", " <<target*ANALOGUE_INPUT_SCALE/2.0 << endl;
-
+    WriteSDO(od::external_reference, data32to4x8(targetCurrentIU));
     WritePDO1(od::run);
     //FlushBuffer();
     return 0;

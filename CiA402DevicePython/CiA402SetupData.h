@@ -23,6 +23,9 @@ public:
 
     int getEncRes() const;
 
+
+    double GetMotorCurrentLimit() const;
+    double GetDriverCurrentLimit() const;
 private:
 
 
@@ -31,6 +34,8 @@ private:
     int encRes;         // Nº lines for incremental encoder quadrature  (lines X 4)
     float SampSL;                   // speed/position loop sampling period of the motor Control (sampling_slow_loop)
     int current_limit;              // current_limit. CAnOpen programming iPOS 5.6.7. Object 207Fh: Current limit
+    double motorCurrentLimit;
+    double driverCurrentLimit;
 
    //Technosoft drives work with parameters and variables represented in the drive internal units (IU).
    // Constant to convert velocity from rad to count/sample
