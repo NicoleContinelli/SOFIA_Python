@@ -49,6 +49,20 @@ class SystemMotors:
     def getFilteredAmps(self, n_samples):
         return [motor.getFilteredAmps(n_samples) for motor in self.motorsArray]
 
-    def getVelocities(self):
+    def Setup_Velocity_Mode(self, vel):
         for motor in self.motorsArray:
-            yield motor.getVelocity()
+            motor.Setup_Velocity_Mode(vel)
+
+    def getVelocity(self):
+        for motor in self.motorsArray:
+            yield motor.GetVelocity()
+
+    def Setup_Torque_Mode(self):
+        for motor in self.motorsArray:
+            motor.Setup_Torque_Mode()
+    
+    def setTorque(self, torqArray):
+        assert self.numMotors == len(torqArray)
+
+        for i, torq in enumerate(torqArray):
+            self.motorsArray[i].setTorque(torq)

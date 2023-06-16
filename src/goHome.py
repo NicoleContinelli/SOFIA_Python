@@ -1,3 +1,5 @@
 from model.system_motors import SystemMotors
-from model.inverse_kinematics import InverseKinematics
-from model.sensor import Sensor
+
+motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
+motors.loadMotors([1, 2, 3])  # motor's ids
+motors.startMotors()  # start motors
