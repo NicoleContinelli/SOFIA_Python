@@ -94,7 +94,7 @@ for step in np.arange(0,12,0.05):
     #incli_rect = ik_incli + error_i 
     #orient_rect = ik_orient + error_o
     incli_rect = incli_target + error_i
-    orient_rect = orient_target 
+    orient_rect = orient_target + error_o
     #if error_o<= 90:
         #orient_rect = orient_target + error_o
 

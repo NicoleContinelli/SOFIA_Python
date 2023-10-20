@@ -34,7 +34,7 @@ def plot_two_function(title, y1_1, y1_2, y2_1, y2_2, t, color1, color2, label1, 
     plt.plot(t, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(t, y2_2, color = color2, label = label3, linewidth = 1.5)
     plt.legend()
-    plt.savefig('MLP_v7_II_prueba.png')
+    plt.savefig('MLP_v7_pruebahoy.png')
     return plt.show()
 
 
@@ -48,8 +48,8 @@ mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
 # Trget values
-incli_target = 30
-orient_target = 15
+incli_target = 25
+orient_target = 250
 
 # Instantiate InverseKinematics class
 kine1 = InverseKinematics(incli_target, orient_target)
