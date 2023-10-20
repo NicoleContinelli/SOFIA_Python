@@ -3,7 +3,9 @@ from model.sensor import Sensor
 import fcontrol as fctl
 import time
 import math
-
+'''
+PENDING FOR REVISIT AND COMMENTS !!!
+'''
 LG0 = 0.003  # meters
 TRADIO = 0.0075  # radio del tambor
 PRADIO = 0.05  # radio de la plataforma
