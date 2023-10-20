@@ -97,7 +97,7 @@ while (abs(pitch) > 0.005 or abs(roll) > 0.005):
     pitchError = targetPose[0] - pitch
     rollError = targetPose[1] - roll
 
-    fdfsd=fcPitchVelocity.
+    #fdfsd=fcPitchVelocity.
 
     pitchCs = fcPitchVelocity.OutputUpdate(pitchError)
     if not math.isfinite(pitchCs):
