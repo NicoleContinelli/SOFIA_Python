@@ -55,7 +55,7 @@ for inclination in range(5, 41, 5):
     df = pd.DataFrame(data, columns=cols)
     # print(df)
     df.to_csv(
-        '/home/sofia/SOFIA_Python/data/Data_2023/data_february/data_orient10_MASTER_24.csv', index=False)
+        '/home/sofia/SOFIA_Python/data/Data_2023/dataSOFIA_Python_february/data_orient10_MASTER_24.csv', index=False)
     df.info()
 
     print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
