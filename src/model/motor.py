@@ -12,8 +12,8 @@ class Motor:
 
     # Json file that allows to load the characteristics of the motor (Neck Json file)
     def __init__(self, idMotor, nameFile):
-        with open(os.path.dirname(os.path.realpath(__file__)) + "/" + nameFile) as neckFile:
-            config = js.load(neckFile)
+        with open(os.path.dirname(os.path.realpath(__file__)) + "/" + nameFile) as articulationFile:
+            config = js.load(articulationFile)
         self.pm = scp.SocketCanPort(config["canPort"])
         self.sd = CiA402sd.CiA402SetupData(config["new_encRes"], config["new_mlRatio"], config["new_SampSL"],
                                            config["motor_current_limit"], config["drive_current_limit"])

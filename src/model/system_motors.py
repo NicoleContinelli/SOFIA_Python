@@ -13,12 +13,12 @@ class SystemMotors:
         self.motorsArray = []
 
     # Assign the motors ID
-    def loadMotors(self, index):
+    def loadMotors(self, index, articulationFile):
         assert self.numMotors == len(index)
 
         for i in index:
             # calling the "Motor" class
-            self.motorsArray.append(Motor(i, "SoftNeckMotorConfig.json"))
+            self.motorsArray.append(Motor(i, articulationFile)) # Here you put the .json config file
 
     # These methods are the same as in the "Motor" class, but know the actions are executed for ALL the motors at a time
     def startMotors(self):
