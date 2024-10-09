@@ -16,7 +16,7 @@ print(time.sleep(3)) # response time
 motors.setupPositionsMode(3,3)  # setting velocity and acceleration values
 print(time.sleep(3))
 
-motors.setPositions([-2])
+#motors.setPositions([2])
 
 '''for i in np.arange(0, 20, 0.5): 
     time.sleep(2)
