@@ -17,7 +17,7 @@ motors.startMotors()  # start motors
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(10, 90)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(20, 60)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.armInverseKinematics()  # saving the length's cables
 
 print("Sleeping time!!!", time.sleep(3))
@@ -27,8 +27,7 @@ print("Sleeping time!!!", time.sleep(3))
 motors.setPositions([theta1, theta2, theta3])
 
 for i in np.arange(0, 10, 0.02):
-    inclination, orientation = mi_sensor.readSensor(
-        mi_sensor)  # new method of teh sensor class
+    inclination, orientation = mi_sensor.readSensorArm(mi_sensor)  # new method of teh sensor class
 
     print("Inclination: ", round(inclination, 1),
           " Orientation: ", round(orientation, 1))

@@ -112,12 +112,13 @@ class InverseKinematics:
     #Calcular angulo de bloque y usar arco
 
         #R=L0/theta
-        R=L0/self.incli
-        L1= self.incli/1.5
+        R = L0/self.incli
 
-        L2= (self.orient/1.732) / (self.incli/3)
+        L1 = self.incli/1.5
 
-        L3= (-self.orient/1.732) / (self.incli/3)
+        L2 = (self.orient/1.732) - (self.incli/3)
+
+        L3 = (-self.orient/1.732) - (self.incli/3)
 
         # Angles variations (radians)
         theta_1 = (L0 - L1) / R

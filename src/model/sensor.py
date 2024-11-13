@@ -32,7 +32,7 @@ class Sensor:
         yaw = self.my_sensor.GetRoll(self.pitch, self.roll, self.yaw)
         return yaw
 
-    def readSensor(self, mi_sensor):
+    def readSensorNeck(self, mi_sensor):
         pitch = mi_sensor.getPitch()
         roll = mi_sensor.getRoll()
         yaw = mi_sensor.getYaw()
@@ -51,5 +51,27 @@ class Sensor:
 
         if orient < 0:
             orient = 360 - abs(orient)
+
+        return incli, orient
+    
+    def readSensorArm(self, mi_sensor):
+        pitch = mi_sensor.getPitch()
+        roll = mi_sensor.getRoll()
+        yaw = mi_sensor.getYaw()
+
+        cos_p = math.cos(pitch)
+        cos_r = math.cos(roll)
+        sen_p = math.sin(pitch)
+        sen_r = math.sin(roll)
+
+        incli = math.sqrt(pitch**2 + roll**2) * (180 / math.pi)
+        orient = ((math.atan2(roll, pitch) * (180 / math.pi)))
+
+        # Conditions for having 360 degrees in orientation
+        '''if orient > 0:
+            orient = orient
+
+        if orient < 0:
+            orient = 360 - abs(orient)'''
 
         return incli, orient
