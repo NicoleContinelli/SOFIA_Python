@@ -64,8 +64,8 @@ class Sensor:
         sen_p = math.sin(pitch)
         sen_r = math.sin(roll)
 
-        incli = math.sqrt(pitch**2 + roll**2) * (180 / math.pi)
-        orient = ((math.atan2(roll, pitch) * (180 / math.pi)))
+        incli = math.sqrt(yaw**2 + pitch**2) * (180 / math.pi)
+        orient = ( ((2*math.pi - math.atan2(pitch, -yaw)) / (2*math.pi)) * (180 / math.pi))
 
         # Conditions for having 360 degrees in orientation
         '''if orient > 0:
