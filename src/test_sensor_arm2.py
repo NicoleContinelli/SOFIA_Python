@@ -9,7 +9,7 @@ import time
 # Knowing the Inclination and Orientation of the sensor, with a prevoius motor position
 
 # Motors
-motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
+motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motorsssss
 motors.loadMotors([31, 32, 33], "SoftArmMotorConfig.json")  # motor's ids
 motors.startMotors()  # start motors
 
@@ -17,12 +17,12 @@ motors.startMotors()  # start motors
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(20, 60)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(25, -250)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.armInverseKinematics()  # saving the length's cables
 
-print("Sleeping time!!!", time.sleep(3))
+print("Sleeping time!!!", time.sleep(1))
 motors.setupPositionsMode(3,3)
-print("Sleeping time!!!", time.sleep(3))
+print("Sleeping time!!!", time.sleep(1))
 
 motors.setPositions([theta1, theta2, theta3])
 
@@ -31,3 +31,5 @@ for i in np.arange(0, 10, 0.02):
 
     print("Inclination: ", round(inclination, 1),
           " Orientation: ", round(orientation, 1))
+    
+motors.setPositions([0,0,0])
