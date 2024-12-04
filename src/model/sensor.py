@@ -57,14 +57,9 @@ class Sensor:
         pitch = mi_sensor.getPitch()
         roll = mi_sensor.getRoll()
         yaw = mi_sensor.getYaw()
-
-        cos_p = math.cos(pitch)
-        cos_r = math.cos(roll)
-        sen_p = math.sin(pitch)
-        sen_r = math.sin(roll)
-
+        
         incli = math.sqrt(yaw**2 + pitch**2) * (180 / math.pi)
-        orient = ( ((2*math.pi - math.atan2(-pitch, -yaw)) / (2*math.pi)) * (180 / math.pi) )
+        orient = (-(math.atan2(pitch, yaw))) * (180 / math.pi) 
 
         # Conditions for having 360 degrees in orientation
         '''if orient > 0:
@@ -73,4 +68,5 @@ class Sensor:
         if orient < 0:
             orient = 360 - abs(orient)'''
 
+        #return roll, pitch, yaw
         return incli, orient

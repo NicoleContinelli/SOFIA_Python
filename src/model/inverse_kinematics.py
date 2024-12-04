@@ -8,8 +8,8 @@ class InverseKinematics:
 
     # incli and orient (in degrees)
     def __init__(self, incli, orient):
-        self.incli = incli * math.pi/180
-        self.orient = orient * math.pi/180
+        self.incli = incli * math.pi/180 # to radians 
+        self.orient = orient * math.pi/180 # to radians 
 
     # Inverse kinematics
     def neckInverseKinematics(self):
@@ -107,22 +107,58 @@ class InverseKinematics:
             theta = 0.001 * math.pi/180
         phi = self.orient'''
 
-
-    #Pendiente
-    #Calcular angulo de bloque y usar arco
-
-        #R=L0/theta
         radious = L0/self.incli
 
         L1 = self.incli/1.5
-
         L2 = (self.orient/1.732) - (self.incli/3)
-
         L3 = (-self.orient/1.732) - (self.incli/3)
 
         # Angles variations (radians)
         theta_1 = (L0 - L1) / radious
         theta_2 = (L0 - L2) / radious
         theta_3 = (L0 - L3) / radious
+
+        return theta_1, theta_2, theta_3
+    
+
+    # Inverse kinematics
+    def armInverseKinematics2(self):
+        a = 0.035 #m distance between A and base
+        b = 0.035 #m distance between B and mobile platform
+        L0 = 0.2 #Arm Lenght
+
+        pitch = -self.incli * math.sin(self.orient)
+        yaw = -self.incli * math.cos(self.orient)
+
+        '''if (self.incli == 0):
+            theta = 0.001 * math.pi/180
+        phi = self.orient'''
+
+        radious = L0/pitch
+
+        L1 = 0.001 * (pitch/1.5)
+        L2 = 0.001 * (-(pitch/3) - (yaw/1.732))
+        L3 = 0.001 * ((yaw/1.732) - (pitch/3))
+
+        # Angles variations (radians)
+        theta_1 = (L0 - L1) / radious
+        theta_2 = (L0 - L2) / radious
+        theta_3 = (L0 - L3) / radious
+
+        return theta_1, theta_2, theta_3
+    
+
+    def armInverseKinematics3(self):
+        a = 0.035 #m distance between A and base
+        b = 0.035 #m distance between B and mobile platform
+        L0 = 0.2 #Arm Lenght
+
+        R = 0.03 # distancia del centro del brazo hasta un link
+        r = 0.019  # distancia del angulo de incli a la curvatura
+
+        theta_1 = (R/r) * self.incli * math.cos(self.orient)
+        theta_2 = (R/r) * self.incli * math.cos(self.orient + 2*math.pi/3)
+        theta_3 = (R/r) * self.incli * math.cos(self.orient + 4*math.pi/3)
+
 
         return theta_1, theta_2, theta_3

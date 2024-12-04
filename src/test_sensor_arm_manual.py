@@ -32,3 +32,7 @@ for i in np.arange(0, 100, 0.02):
 
     print("Inclination: ", round(inclination, 1),
           " Orientation: ", round(orientation, 1))
+    
+'''     print("Roll: ", roll,
+          " Pitch: ", pitch, 
+            "yaw: ", yaw)'''
