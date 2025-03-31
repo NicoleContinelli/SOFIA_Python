@@ -162,3 +162,38 @@ class InverseKinematics:
 
 
         return theta_1, theta_2, theta_3
+    
+
+
+    def armInverseKinematics4_newjorge(self):
+        a = 0.035 #m distance between A and base
+        b = 0.035 #m distance between B and mobile platform
+        L0 = 0.2 #Arm Lenght
+
+        R = 0.03 # distancia del centro del brazo hasta un link
+        r = 0.019  # distancia del angulo de incli a la curvatura
+
+        theta_1 = (R/r) * self.incli * math.cos(self.orient)
+        theta_2 = (R/r) * self.incli * math.cos(self.orient + 2*math.pi/3)
+        theta_3 = (R/r) * self.incli * math.cos(self.orient + 4*math.pi/3)
+
+
+        return theta_1, theta_2, theta_3
+    
+
+    def clawInverseKinematics(self):
+        a = 0.013 #m distance between A and base
+        b = 0.035 #m distance between B and mobile platform
+        L0 = 0.098 #Arm Lenght
+
+        radius = 0.008 # distancia del centro del brazo hasta un link
+        r = 0.019  # distancia del angulo de incli a la curvatura
+        R = L0/radius
+
+        L1 = L0 - (self.incli * a * math.cos((7*math.pi/6) - self.orient))
+        L2 = L0 - (self.incli * a * math.cos((math.pi/2) - self.orient))
+
+        theta_1 = (L0 - L1) / radius
+        theta_2 = (L0 - L2) / radius
+
+        return theta_1, theta_2

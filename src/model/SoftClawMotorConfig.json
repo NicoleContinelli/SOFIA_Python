@@ -1,0 +1,9 @@
+{
+    "type" : "softClaw",
+    "new_encRes" : 98304,
+    "new_mlRatio" : 1,
+    "new_SampSL" : 0.001,
+    "motor_current_limit" : 3.74,
+    "drive_current_limit" : 3.74,
+    "canPort" : "can0"
+}
