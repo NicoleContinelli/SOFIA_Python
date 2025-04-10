@@ -23,24 +23,25 @@ def plot_two_function(title, y1_1, y1_2, y2_1, y2_2, t, color1, color2, label1, 
     plt.grid()
     plt.plot(t, y1_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(t, y1_2, color = color2, label = label2, linewidth = 1.5)
-    plt.ylabel("Inclinación (grados)")
+    plt.ylabel("Inclination (degrees)")
     plt.title(title)
     plt.legend()
     
     plt.subplot(2, 1, 2)
     plt.grid()
-    plt.xlabel("Tiempo (segundos)")
-    plt.ylabel("Orientación (grados)")
+    plt.xlabel("Time (seconds)")
+    plt.ylabel("Orientation (degrees)")
     plt.plot(t, y2_1, color = color1, label = label1, linestyle = 'dashdot', linewidth = 3.5)
     plt.plot(t, y2_2, color = color2, label = label3, linewidth = 1.5)
     plt.legend()
-    plt.savefig('MLP_v3_deg.png')
+    #plt.savefig('MLP_v3_deg.png')
+    plt.savefig('MLP_paper_robot_one_pos_degrees_v3.png')
     return plt.show()
 
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([1, 2, 3])  # motor's ids
+motors.loadMotors([1, 2, 3], "SoftNeckMotorConfig.json")  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
@@ -84,7 +85,7 @@ std_motors = 0.2670333006545897
 for step in np.arange(0,14,0.05):
     step =+ step
     print(step)
-    ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
+    ik_incli, ik_orient = mi_sensor.readSensorNeck(mi_sensor)
 
     # Calculate the Inclination and Orientation sensor error
     error_i = incli_target - ik_incli 
@@ -119,11 +120,11 @@ for step in np.arange(0,14,0.05):
     new_theta3 = theta_rect3 + error_theta3
 
     #print sensor
-    print("Inclination: ", round(ik_incli, 1),
+    '''    print("Inclination: ", round(ik_incli, 1),
             " Orientation: ", round(ik_orient, 1))
 
     print('Rect. incli: ' , round(incli_rect,1), '  Rect. orient:', round(orient_rect,1))
-    
+    '''
     # Setting new positions with the adjusted thetas
     motors.setPositions([new_theta1, new_theta2, new_theta3])
 
@@ -131,7 +132,7 @@ for step in np.arange(0,14,0.05):
     #ik_incli, ik_orient = mi_sensor.readSensor(mi_sensor)
     end_time = timer() # record the time again
     elapsed_time = end_time - start_time # calculate the elapsed time
-    print(f"Elapsed time: {elapsed_time:.6f} seconds")  # print the elapsed time in seconds with 6 decimal places
+    #print(f"Elapsed time: {elapsed_time:.6f} seconds")  # print the elapsed time in seconds with 6 decimal places
 
 
     incli_data.append(ik_incli)
@@ -142,12 +143,27 @@ for step in np.arange(0,14,0.05):
 
     time_data.append(elapsed_time)
 
-    #print sensor
-   # print("Inclination: ", round(ik_incli, 1),
-   #         " Orientation: ", round(ik_orient, 1))
+
+    data = {
+    "Real Incli": incli_data,
+    "Real Orient": orient_data,
+    "Time": time_data,
+    "Target Incli": list_incli_target,
+    "Target Orient": list_orient_target 
+    }
+
+    df = pd.DataFrame(data)
+    df.to_csv('/home/sofia/SOFIA_Python/data/Data_2025/Data_Paper_Robotics/one_pos_degree_v3.csv', index=False)
 
 
+plot_two_function("Control de lazo cerrado de la Cinemática Inversa - MLP sin transformación datos",
+                 list_incli_target,incli_data,list_orient_target,orient_data,time_data,
+                 "black", "#C70039", 
+                 "Target","Inclination - IMU","Orientation - IMU")
 
+motors.setPositions([0,0,0])
+
+'''
 plot_two_function("Control de lazo cerrado de la Cinemática Inversa - MLP sin transformación datos",
                  list_incli_target,incli_data,list_orient_target,orient_data,time_data,
                  "black", "#C70039", 
@@ -155,7 +171,7 @@ plot_two_function("Control de lazo cerrado de la Cinemática Inversa - MLP sin t
 
 motors.setPositions([0,0,0])
 
-'''y_axis_i = incli_data
+y_axis_i = incli_data
 y_axis_o = orient_data
 
 fig, axs = plt.subplots(2)

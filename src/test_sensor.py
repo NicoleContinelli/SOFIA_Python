@@ -23,8 +23,7 @@ motors.setupPositionsMode(12, 12)
 motors.setPositions([theta1, theta2, theta3])
 
 for i in np.arange(0, 2, 0.02):
-    inclination, orientation = mi_sensor.readSensor(
-        mi_sensor)  # new method of teh sensor class
+    inclination, orientation = mi_sensor.readSensorNeck(mi_sensor)  # new method of teh sensor class
 
     print("Inclination: ", round(inclination, 1),
           " Orientation: ", round(orientation, 1))
