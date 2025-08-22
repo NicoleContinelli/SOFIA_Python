@@ -1,5 +1,9 @@
-
-
+<p align="justify">
+Article reference: ROBOT_ROBOT-D-25-00026
+Authors: Nicole A. Continelli, Luis F. Nagua, Concepción A. Monje, Pablo Martínez Olmos
+Article title:  Combined model-based and data-driven approach for the control of a soft robotic neck
+Published in: Robotics and Autonomous Systems
+</p>
 
 
 # SOFIA_Python
