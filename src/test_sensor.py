@@ -27,3 +27,5 @@ for i in np.arange(0, 2, 0.02):
 
     print("Inclination: ", round(inclination, 1),
           " Orientation: ", round(orientation, 1))
+
+
