@@ -47,15 +47,15 @@ for inclination in range(5, 36, 5):
             print("Inclination: ", round(incli, 1),
                   " Orientation: ", round(orient, 1))
 
-            # Adding the values of incli, orient and encoders in "data"
-            data.append([incli, orient, motors.motorsArray[0].getPosition(
-            ), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
+        # Adding the values of incli, orient and encoders in "data"
+        data.append([incli, orient, motors.motorsArray[0].getPosition(
+        ), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
 
     # adding the data values (array type), to the data frame
     df = pd.DataFrame(data, columns=cols)
     # print(df)
     df.to_csv(
-        '/home/sofia/Documents/17102025_neck_carne.csv', index=False)
+        '/home/sofia/Documents/03072026_neck_carne_pinn_train.csv', index=False)
     # df.to_csv(
         #'/home/sofia/SOFIA_Python/data/Data_2023/dataSOFIA_Python_february/data_orient10_MASTER_24.csv', index=False)
     df.info()
