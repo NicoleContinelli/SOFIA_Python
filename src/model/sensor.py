@@ -36,13 +36,8 @@ class Sensor:
         pitch = mi_sensor.getPitch()
         roll = mi_sensor.getRoll()
 
-        cos_p = math.cos(pitch)
-        cos_r = math.cos(roll)
-        sen_p = math.sin(pitch)
-        sen_r = math.sin(roll)
-
         incli = math.sqrt(pitch**2 + roll**2) * (180 / math.pi)
-        orient = ((math.atan2(roll, pitch) * (180 / math.pi)))
+        orient = ((math.atan2(roll, pitch) * (180 / math.pi))) 
 
         # Conditions for having 360 degrees in orientation
         if orient > 0:
@@ -50,9 +45,15 @@ class Sensor:
 
         if orient < 0:
             orient = 360 - abs(orient)
+        # pitch = mi_sensor.getPitch()
+        # roll = -mi_sensor.getRoll()
+
+        # incli = math.degrees(math.sqrt(pitch**2 + roll**2))
+        # orient = math.degrees(math.atan2(pitch, roll)) % 360
 
         return incli, orient
-    
+
+
     def readSensorArm(self, mi_sensor):
         pitch = mi_sensor.getPitch()
         roll = mi_sensor.getRoll()

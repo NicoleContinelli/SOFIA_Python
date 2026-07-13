@@ -33,8 +33,7 @@ def plot_two_function(title, y1_1, y1_2, y2_1, y2_2, t,
     plt.plot(t, y2_1, color=color1, label=label1, linestyle='dashdot', linewidth=3.5)
     plt.plot(t, y2_2, color=color2, label=label3, linewidth=1.5)
     plt.legend()
-
-    plt.savefig("PINN_robot_one_pos_pt_2.png")
+    plt.savefig("PINN_robot_one_pos_pt_3_13072026.png")
     plt.show()
 
 
@@ -216,8 +215,8 @@ mi_sensor.sensorStream()
 # ============================================================
 # TARGET
 # ============================================================
-incli_target = 25
-orient_target = 200
+incli_target = 10
+orient_target = 50
 
 incli_corr, orient_corr, d_alpha_deg, d_beta_deg = correct_pose_with_pinn(
     incli_target,
@@ -255,7 +254,7 @@ time_data = []
 list_incli_target = []
 list_orient_target = []
 
-CSV_OUT = "/home/sofia/SOFIA_Python/data/Data_2026/one_pos_PINN_pt.csv"
+CSV_OUT = "/home/sofia/SOFIA_Python/data/Data_2026/one_pos_PINN_pt_fourier_13072026.csv"
 
 start_time = timer()
 
@@ -290,7 +289,9 @@ for _ in np.arange(0, 14, 0.05):
         "theta3_cmd": [theta3] * len(incli_data),
         "encoding_type": [model_cfg["encoding_type"]] * len(incli_data),
     }
-
+    #quiero pich roll del sensor imprimir en pantalla   
+    #print(f"Pitch: {mi_sensor.getPitch():.2f}, Roll: {mi_sensor.getRoll():.2f}")
+    
     df = pd.DataFrame(data)
     df.to_csv(CSV_OUT, index=False)
 

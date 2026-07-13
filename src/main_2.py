@@ -41,27 +41,10 @@ for inclination in range(5, 36, 5):
         motors.setPositions([theta1, theta2, theta3])
 
         # Knowing the Inclination and Orientation of the sensor, with a previous motor position
-        for i in np.arange(0, 2, 0.02):  # time sampling >> steps of 0.02
+        for i in np.arange(0, 2, 1):  # time sampling >> steps of 0.02
             incli, orient = mi_sensor.readSensorNeck(mi_sensor)
 
             print("Inclination: ", round(incli, 1),
                   " Orientation: ", round(orient, 1))
 
-        # Adding the values of incli, orient and encoders in "data"
-        data.append([incli, orient, motors.motorsArray[0].getPosition(
-        ), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
 
-    # adding the data values (array type), to the data frame
-    df = pd.DataFrame(data, columns=cols)
-    # print(df)
-    df.to_csv(
-        '/home/sofia/Documents/13072026_neck_carne_pinn_train.csv', index=False)
-    # df.to_csv(
-        #'/home/sofia/SOFIA_Python/data/Data_2023/dataSOFIA_Python_february/data_orient10_MASTER_24.csv', index=False)
-    df.info()
-
-    print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
-
-print("Data Ready")
-
-motors.setPositions([theta1, theta2, theta3])
