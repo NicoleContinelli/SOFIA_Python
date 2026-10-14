@@ -7,7 +7,7 @@ import numpy as np
 
 # Motorsml
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([1, 2, 3], "SoftNeckMotorConfig.json")  # motor's ids
+motors.loadMotors([1, 2, 3], "SoftNeckMotorConfigOld.json")  # motor's ids
 #motors.loadMotors([31, 32, 33], "SoftArmMotorConfig.json")  
 motors.startMotors()  # start motors
 

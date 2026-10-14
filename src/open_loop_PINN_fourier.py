@@ -140,7 +140,7 @@ class CorrectionPINN(nn.Module):
 # ============================================================
 # CARGAR CHECKPOINT .PT
 # ============================================================
-MODEL_PATH = "/home/sofia/SOFIA_Python/ml/PINN_model/pinn_neck_fourier_final.pt"   # cambia ruta
+MODEL_PATH = "/home/sofia/SOFIA_Python/ml/PINN_model/pinn_neck_fourier_final_naranja.pt"   # cambia ruta
 device = torch.device("cpu")
 
 checkpoint = torch.load(MODEL_PATH, map_location=device)
@@ -205,7 +205,7 @@ def correct_pose_with_pinn(incli_deg, orient_deg, model, beta_offset_rad, device
 # HARDWARE
 # ============================================================
 motors = SystemMotors(3)
-motors.loadMotors([1, 2, 3], "SoftNeckMotorConfig.json")
+motors.loadMotors([1, 2, 3], "SoftNeckMotorConfigOld.json")
 motors.startMotors()
 
 mi_sensor = Sensor()
@@ -216,7 +216,7 @@ mi_sensor.sensorStream()
 # TARGET
 # ============================================================
 incli_target = 10
-orient_target = 50
+orient_target = 30
 
 incli_corr, orient_corr, d_alpha_deg, d_beta_deg = correct_pose_with_pinn(
     incli_target,
@@ -254,7 +254,7 @@ time_data = []
 list_incli_target = []
 list_orient_target = []
 
-CSV_OUT = "/home/sofia/SOFIA_Python/data/Data_2026/one_pos_PINN_pt_fourier_13072026.csv"
+CSV_OUT = "/home/sofia/SOFIA_Python/data/Data_2026/one_pos_PINN_pt_fourier_14102026.csv"
 
 start_time = timer()
 

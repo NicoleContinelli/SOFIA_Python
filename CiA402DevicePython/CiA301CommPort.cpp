@@ -254,7 +254,7 @@ long CiA301CommPort::EnablePDOs()
     //(SDO write access to object 1A01 h sub-index 0 the 8-bit value 00 h ):
     cout << WriteSDO(pdo::tx1enable ,data);
     cout << WriteSDO(pdo::tx2enable ,data);
-    cout << WriteSDO(pdo::tx3enable ,data);
+    cout << WriteSDO(pdo::tx3enable ,data) << endl;
 
     return 0;
 }

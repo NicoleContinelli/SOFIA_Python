@@ -9,23 +9,23 @@ import pandas as pd
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([1, 2, 3], "SoftNeckMotorConfig.json")  # motor's ids
+motors.loadMotors([1, 2, 3], "SoftNeckMotorConfigOld.json")  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
 mi_sensor = Sensor()
 mi_sensor.sensorStream()
 
-kine1 = InverseKinematics(20, 180)  # instantiate InverseKinematics class
+kine1 = InverseKinematics(33.5, 51)  # instantiate InverseKinematics class
 theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
 
 motors.setupPositionsMode(12, 12)
 motors.setPositions([theta1, theta2, theta3])
 
-for i in np.arange(0, 40, 0.02):
+for i in np.arange(0, 10, 0.02):
     inclination, orientation = mi_sensor.readSensorNeck(mi_sensor)  # new method of teh sensor class
 
     print("Inclination: ", round(inclination, 1),
           " Orientation: ", round(orientation, 1))
 
-
+motors.setPositions([0, 0, 0])

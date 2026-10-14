@@ -37,6 +37,7 @@ const vector<uint8_t> stop_option_code={0x5D,0x60};
 const vector<uint8_t> checkerror={0x02,0x10};
 
 //address must be complete index and subindex {I1,I2,S1}
+const vector<uint8_t> position_internal={0x63,0x60,0x00};
 const vector<uint8_t> positionaddress={0x64,0x60,0x00};
 const vector<uint8_t> velocityactvalue={0x69,0x60};
 const vector<uint8_t> velocityaddress={0x69,0x60};
@@ -44,7 +45,12 @@ const vector<uint8_t> target_position={0x7A,0x60,0x00};
 const vector<uint8_t> position_demand={0x62,0x60,0x00};
 
 //Torque
-const vector<uint8_t> torquemode={0xFB};
+// const vector<uint8_t> torquemode={0xFB};
+const vector<uint8_t> torquemode={0x04};
+const vector<uint8_t> torque_slope={0x87,0x60,0x00};
+const vector<uint8_t> target_torque={0x71,0x60,0x00};
+const vector<uint8_t> torque_run={0x1F,0x00};
+
 const vector<uint8_t> external_reference_type={0x1D,0x20,0x00};
 const vector<uint8_t> torque_online_enable={0x01,0x00};
 const vector<uint8_t> current_limit={0x7F,0x20}; //internal units
@@ -68,7 +74,5 @@ const vector<uint8_t> velocity_encoder_resolution_den={0x94,0x60,0x02};
 
 const vector<uint8_t> gear_ratio={0x91,0x60,0x00};
 
-
-const vector<uint8_t> aa={0x71,0x60,0x00};
 }
 #endif // OBJECTDICTIONARY_H

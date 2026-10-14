@@ -2,6 +2,7 @@
 import math
 import numpy as np
 import pandas as pd
+import time
 
 
 from model.system_motors import SystemMotors
@@ -11,7 +12,7 @@ from model.sensor import Sensor
 
 # Motors
 motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
-motors.loadMotors([1, 2, 3], "SoftNeckMotorConfig.json")  # motor's ids
+motors.loadMotors([1, 2, 3], "SoftNeckMotorConfigOld.json")  # motor's ids
 motors.startMotors()  # start motors
 
 # Sensor
@@ -25,7 +26,7 @@ inclination = 0
 # Parameters of the DataFrame
 cols = ['Inclination', 'Orientation', 'M1', 'M2', 'M3']
 data = []
-#motors.setupPositionsMode(12, 12)  # setting velocity and acceleration values
+motors.setupPositionsMode(6, 6)  # setting velocity and acceleration values
 
 # Inclination's repetition
 #motors = SystemMotors(3)  # instantiate SystemMotors class >> number of motors
@@ -37,14 +38,37 @@ for inclination in range(5, 36, 5):
         # instantiate InverseKinematics class
         kine1 = InverseKinematics(inclination, orientation)
         theta1, theta2, theta3 = kine1.neckInverseKinematics()  # saving the length's cables
-        motors.setupPositionsMode(12, 12)  # setting velocity and acceleration values
+        #motors.setupPositionsMode(12, 12)  # setting velocity and acceleration values
         motors.setPositions([theta1, theta2, theta3])
 
         # Knowing the Inclination and Orientation of the sensor, with a previous motor position
-        for i in np.arange(0, 2, 1):  # time sampling >> steps of 0.02
+        for i in np.arange(0, 2, 0.02):  # time sampling >> steps of 0.02
             incli, orient = mi_sensor.readSensorNeck(mi_sensor)
 
-            print("Inclination: ", round(incli, 1),
-                  " Orientation: ", round(orient, 1))
+            print(f"Time: {round(i, 2):8.2f} "
+                f"Inclination: {round(incli, 1):8.1f} "
+                f"Orientation: {round(orient, 1):8.1f}")
+                    
+        time.sleep(2) # time to wait for the motors to reach the position
+
+        # Adding the values of incli, orient and encoders in "data"
+        data.append([incli, orient, motors.motorsArray[0].getPosition(
+        ), motors.motorsArray[1].getPosition(), motors.motorsArray[2].getPosition()])
+
+        
+
+    # adding the data values (array type), to the data frame
+    df = pd.DataFrame(data, columns=cols)
+    # print(df)
+    df.to_csv(
+        '/home/sofia/Documents/14102026_neck_naranja_pinn_train.csv', index=False)
+    # df.to_csv(
+        #'/home/sofia/SOFIA_Python/data/Data_2023/dataSOFIA_Python_february/data_orient10_MASTER_24.csv', index=False)
+    df.info()
+
+    print("Inclination: ", round(incli, 1), " Orientation: ", round(orient, 1))
+
+print("Data Ready")
+
 
 
